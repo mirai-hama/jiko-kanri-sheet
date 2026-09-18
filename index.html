@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>自己管理シート</title>
+
 <style>
 body {
   font-family: sans-serif;
@@ -12,6 +13,7 @@ body {
   padding: 20px;
   color: #333;
 }
+
 .container {
   max-width: 500px;
   margin: auto;
@@ -20,23 +22,101 @@ body {
   border-radius: 16px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
+
 h1 {
   text-align: center;
   color: #4b3f9b;
   margin-bottom: 8px;
 }
+
 .date {
   text-align: center;
   font-size: 18px;
   margin-bottom: 24px;
   font-weight: bold;
 }
+
+/* ログイン画面 */
+
+#loginScreen h2 {
+  text-align: center;
+  color: #4b3f9b;
+  margin-bottom: 20px;
+}
+
+.user-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.user-button {
+  padding: 15px 10px;
+  font-size: 17px;
+  background: #fff;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.user-button:active {
+  background: #eee;
+}
+
+#passwordScreen {
+  display: none;
+  text-align: center;
+}
+
+#passwordScreen h2 {
+  color: #4b3f9b;
+}
+
+.password-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px;
+  font-size: 20px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 15px 0;
+}
+
+.login-button {
+  width: 100%;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background: #4b3f9b;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.back-button {
+  margin-top: 12px;
+  padding: 10px 20px;
+  font-size: 15px;
+  background: white;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+}
+
+/* 入力画面 */
+
+#sheetScreen {
+  display: none;
+}
+
 label {
   display: block;
   margin-top: 18px;
   margin-bottom: 7px;
   font-weight: bold;
 }
+
 input[type="text"],
 input[type="number"] {
   width: 100%;
@@ -46,26 +126,32 @@ input[type="number"] {
   border: 1px solid #ccc;
   border-radius: 8px;
 }
+
 .time-input {
   text-align: center;
   letter-spacing: 2px;
 }
+
 .note {
   font-size: 13px;
   color: #666;
   margin-top: 5px;
 }
+
 .choices {
   display: flex;
   gap: 10px;
 }
+
 .choice {
   flex: 1;
   position: relative;
 }
+
 .choice input {
   display: none;
 }
+
 .choice span {
   display: block;
   text-align: center;
@@ -76,11 +162,13 @@ input[type="number"] {
   cursor: pointer;
   font-size: 17px;
 }
+
 .choice input:checked + span {
   background: #5b4bb7;
   color: white;
   border-color: #5b4bb7;
 }
+
 textarea {
   width: 100%;
   box-sizing: border-box;
@@ -91,6 +179,7 @@ textarea {
   border-radius: 8px;
   resize: vertical;
 }
+
 button.save {
   width: 100%;
   margin-top: 25px;
@@ -103,6 +192,7 @@ button.save {
   border-radius: 10px;
   cursor: pointer;
 }
+
 button.save:active {
   opacity: 0.8;
 }
@@ -113,11 +203,63 @@ button.save:active {
 
 <div class="container">
 
+<!-- ログイン画面 -->
+
+<div id="loginScreen">
+
+<h1>自己管理シート</h1>
+
+<h2>自分の名前を選んでください</h2>
+
+<div class="user-list" id="userList"></div>
+
+</div>
+
+
+<!-- パスワード画面 -->
+
+<div id="passwordScreen">
+
+<h1>自己管理シート</h1>
+
+<h2 id="selectedUser"></h2>
+
+<p>パスワードを入力してください</p>
+
+<input
+  type="password"
+  id="password"
+  class="password-input"
+  inputmode="numeric"
+  maxlength="8"
+  placeholder="パスワード"
+>
+
+<button class="login-button" id="loginButton">
+ログイン
+</button>
+
+<br>
+
+<button class="back-button" id="backButton">
+名前を選び直す
+</button>
+
+</div>
+
+
+<!-- 自己管理シート -->
+
+<div id="sheetScreen">
+
 <h1>自己管理シート</h1>
 
 <div class="date" id="date"></div>
 
+<div style="text-align:center; font-weight:bold;" id="userName"></div>
+
 <label>来所時間</label>
+
 <input
   type="text"
   id="arrival"
@@ -129,6 +271,7 @@ button.save:active {
 >
 
 <label>帰る時間</label>
+
 <input
   type="text"
   id="leave"
@@ -140,6 +283,7 @@ button.save:active {
 >
 
 <label>体温</label>
+
 <input
   type="text"
   id="temp"
@@ -147,6 +291,7 @@ button.save:active {
   placeholder="例：36.5"
   autocomplete="off"
 >
+
 <div class="note">
 体温は36.5のように「.」を入れて入力してください。
 </div>
@@ -164,15 +309,138 @@ button.save:active {
 <div class="choices" id="throat"></div>
 
 <label>その他</label>
-<textarea id="other" placeholder="気になることがあれば入力してください"></textarea>
 
-<button class="save" id="save">保存</button>
+<textarea
+  id="other"
+  placeholder="気になることがあれば入力してください"
+></textarea>
+
+<button class="save" id="save">
+保存
+</button>
 
 </div>
 
+</div>
+
+
 <script>
 
-// 今日の日付
+/* =========================
+   利用者設定
+========================= */
+
+const users = [
+  { name: "Aさん", password: "1234" },
+  { name: "Bさん", password: "1234" },
+  { name: "Cさん", password: "1234" },
+  { name: "Dさん", password: "1234" },
+  { name: "Eさん", password: "1234" },
+  { name: "Fさん", password: "1234" },
+  { name: "Gさん", password: "1234" },
+  { name: "Hさん", password: "1234" },
+  { name: "Iさん", password: "1234" },
+  { name: "Jさん", password: "1234" },
+  { name: "Kさん", password: "1234" },
+  { name: "Lさん", password: "1234" },
+  { name: "Mさん", password: "1234" },
+  { name: "Nさん", password: "1234" }
+];
+
+
+let selectedUser = null;
+
+
+/* =========================
+   利用者一覧を表示
+========================= */
+
+const userList = document.getElementById("userList");
+
+users.forEach((user, index) => {
+
+  const button = document.createElement("button");
+
+  button.className = "user-button";
+  button.textContent = user.name;
+
+  button.addEventListener("click", () => {
+
+    selectedUser = user;
+
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("passwordScreen").style.display = "block";
+
+    document.getElementById("selectedUser").textContent =
+      user.name;
+
+    document.getElementById("password").value = "";
+
+    document.getElementById("password").focus();
+
+  });
+
+  userList.appendChild(button);
+
+});
+
+
+/* =========================
+   パスワード確認
+========================= */
+
+document.getElementById("loginButton").addEventListener("click", () => {
+
+  const password =
+    document.getElementById("password").value;
+
+  if (password === selectedUser.password) {
+
+    document.getElementById("passwordScreen").style.display = "none";
+    document.getElementById("sheetScreen").style.display = "block";
+
+    document.getElementById("userName").textContent =
+      selectedUser.name;
+
+  } else {
+
+    alert("パスワードが違います。");
+
+    document.getElementById("password").value = "";
+    document.getElementById("password").focus();
+
+  }
+
+});
+
+
+/* Enterキーでもログイン */
+
+document.getElementById("password").addEventListener("keydown", (e) => {
+
+  if (e.key === "Enter") {
+    document.getElementById("loginButton").click();
+  }
+
+});
+
+
+/* 名前を選び直す */
+
+document.getElementById("backButton").addEventListener("click", () => {
+
+  selectedUser = null;
+
+  document.getElementById("passwordScreen").style.display = "none";
+  document.getElementById("loginScreen").style.display = "block";
+
+});
+
+
+/* =========================
+   今日の日付
+========================= */
+
 const today = new Date();
 
 const year = today.getFullYear();
@@ -185,7 +453,10 @@ document.getElementById("date").textContent =
   `${year}年${month}月${day}日（${weekdays[today.getDay()]}）`;
 
 
-// 体調項目を作成
+/* =========================
+   体調項目
+========================= */
+
 const healthItems = [
   ["cough", "咳"],
   ["headache", "頭痛"],
@@ -212,16 +483,19 @@ healthItems.forEach(([id, name]) => {
 });
 
 
-// 有・無を押すと選択。
-// 選択中のものをもう一度押すと解除
+/* 有・無の選択・解除 */
+
 document.querySelectorAll(".choices input").forEach(input => {
 
   input.addEventListener("click", function(e) {
 
     if (this.dataset.checked === "true") {
+
       this.checked = false;
       this.dataset.checked = "false";
+
       e.preventDefault();
+
     } else {
 
       const name = this.name;
@@ -233,6 +507,7 @@ document.querySelectorAll(".choices input").forEach(input => {
         });
 
       this.dataset.checked = "true";
+
     }
 
   });
@@ -240,9 +515,10 @@ document.querySelectorAll(".choices input").forEach(input => {
 });
 
 
-// 時間入力
-// 15 と入力すると自動的に 15:
-// そのまま 30 と入力すると 15:30 になる
+/* =========================
+   時間入力
+========================= */
+
 function setupTimeInput(id) {
 
   const input = document.getElementById(id);
@@ -251,38 +527,48 @@ function setupTimeInput(id) {
 
     let value = this.value;
 
-    // 数字以外を削除
     value = value.replace(/[^0-9]/g, "");
 
-    // 4桁まで
     value = value.slice(0, 4);
 
-    // 2桁入力されたら : を自動追加
     if (value.length > 2) {
-      value = value.slice(0, 2) + ":" + value.slice(2);
+
+      value =
+        value.slice(0, 2) +
+        ":" +
+        value.slice(2);
+
     }
 
     this.value = value;
 
-    // 「15:」まで入力されたら分の位置へ
     if (value.length === 3) {
+
       this.setSelectionRange(3, 3);
+
     }
 
   });
 
-  // キーボードから : を入力しても対応
+
   input.addEventListener("blur", function() {
 
-    let value = this.value.replace(/[^0-9]/g, "");
+    let value =
+      this.value.replace(/[^0-9]/g, "");
 
     if (value.length === 3) {
+
       value = "0" + value;
+
     }
 
     if (value.length === 4) {
+
       this.value =
-        value.slice(0, 2) + ":" + value.slice(2);
+        value.slice(0, 2) +
+        ":" +
+        value.slice(2);
+
     }
 
   });
@@ -293,47 +579,89 @@ setupTimeInput("arrival");
 setupTimeInput("leave");
 
 
-// 保存
+/* =========================
+   保存
+========================= */
+
 document.getElementById("save").addEventListener("click", function() {
 
-  const arrival = document.getElementById("arrival").value;
-  const leave = document.getElementById("leave").value;
-  const temp = document.getElementById("temp").value;
+  const arrival =
+    document.getElementById("arrival").value;
 
-  const healthNames = ["cough", "headache", "runny", "throat"];
+  const leave =
+    document.getElementById("leave").value;
 
-  // 必須チェック
+  const temp =
+    document.getElementById("temp").value;
+
+
   if (!arrival || !leave || !temp) {
-    alert("来所時間・帰る時間・体温を入力してください。");
+
+    alert(
+      "来所時間・帰る時間・体温を入力してください。"
+    );
+
     return;
+
   }
 
-  // 時間チェック
-  const timePattern = /^(?:[01]\d|2[0-3]):[0-5]\d$/;
 
-  if (!timePattern.test(arrival) || !timePattern.test(leave)) {
-    alert("時間は「15:30」のように入力してください。");
+  const timePattern =
+    /^(?:[01]\d|2[0-3]):[0-5]\d$/;
+
+
+  if (
+    !timePattern.test(arrival) ||
+    !timePattern.test(leave)
+  ) {
+
+    alert(
+      "時間は「15:30」のように入力してください。"
+    );
+
     return;
+
   }
 
-  // 体温チェック
+
   if (!/^\d{2}\.\d$/.test(temp)) {
-    alert("体温は「36.5」のように「.」を入れて入力してください。");
+
+    alert(
+      "体温は「36.5」のように「.」を入れて入力してください。"
+    );
+
     return;
+
   }
 
-  // 体調チェック
+
+  const healthNames = [
+    "cough",
+    "headache",
+    "runny",
+    "throat"
+  ];
+
+
   for (const name of healthNames) {
 
     const selected =
-      document.querySelector(`input[name="${name}"]:checked`);
+      document.querySelector(
+        `input[name="${name}"]:checked`
+      );
 
     if (!selected) {
-      alert("体調変化の「有・無」をすべて選択してください。");
+
+      alert(
+        "体調変化の「有・無」をすべて選択してください。"
+      );
+
       return;
+
     }
 
   }
+
 
   alert("記録を保存しました。");
 
