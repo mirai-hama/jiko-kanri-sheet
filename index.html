@@ -1,250 +1,238 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#5b5bd6">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>自己管理シート</title>
-
 <style>
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP",sans-serif;
-  background:#f5f6fb;
-  color:#222
+body {
+  font-family: sans-serif;
+  background: #f5f6fa;
+  margin: 0;
+  padding: 20px;
+  color: #333;
 }
-
-header{
-  background:linear-gradient(135deg,#4d5bd4,#7656c8);
-  color:#fff;
-  padding:22px 18px
+.container {
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
-
-header h1{
-  margin:0;
-  font-size:22px
+h1 {
+  text-align: center;
+  color: #4b3f9b;
+  margin-bottom: 8px;
 }
-
-header p{
-  margin:6px 0 0;
-  opacity:.9;
-  font-size:13px
+.date {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 24px;
+  font-weight: bold;
 }
-
-main{
-  max-width:720px;
-  margin:auto;
-  padding:18px
+label {
+  display: block;
+  margin-top: 18px;
+  margin-bottom: 7px;
+  font-weight: bold;
 }
-
-.card{
-  background:#fff;
-  border-radius:16px;
-  padding:18px;
-  margin-bottom:16px;
-  box-shadow:0 3px 14px #0000000d
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
-
-h2{
-  font-size:18px;
-  margin:0 0 14px
+.time-input {
+  text-align: center;
+  letter-spacing: 2px;
 }
-
-.today{
-  font-size:20px;
-  font-weight:700;
-  margin-bottom:14px
+.note {
+  font-size: 13px;
+  color: #666;
+  margin-top: 5px;
 }
-
-label{
-  display:block;
-  font-weight:700;
-  font-size:14px;
-  margin:14px 0 6px
+.choices {
+  display: flex;
+  gap: 10px;
 }
-
-input,textarea{
-  width:100%;
-  padding:12px;
-  border:1px solid #d7d9e3;
-  border-radius:10px;
-  font-size:16px;
-  background:#fff
+.choice {
+  flex: 1;
+  position: relative;
 }
-
-textarea{
-  min-height:90px;
-  resize:vertical
+.choice input {
+  display: none;
 }
-
-.choices{
-  display:flex;
-  gap:10px
+.choice span {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 17px;
 }
-
-.choices label{
-  margin:0;
-  flex:1
+.choice input:checked + span {
+  background: #5b4bb7;
+  color: white;
+  border-color: #5b4bb7;
 }
-
-.choices input{
-  display:none
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 90px;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: vertical;
 }
-
-.choices span{
-  display:block;
-  text-align:center;
-  padding:11px;
-  border:1px solid #d7d9e3;
-  border-radius:10px;
-  font-weight:600
+button.save {
+  width: 100%;
+  margin-top: 25px;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background: #4b3f9b;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 }
-
-.choices input:checked+span{
-  background:#ecebff;
-  border-color:#6559d8;
-  color:#4c43b7
-}
-
-button{
-  width:100%;
-  border:0;
-  border-radius:12px;
-  padding:14px;
-  font-size:16px;
-  font-weight:700;
-  background:#5b5bd6;
-  color:#fff
-}
-
-.note{
-  font-size:12px;
-  color:#777;
-  line-height:1.6
+button.save:active {
+  opacity: 0.8;
 }
 </style>
 </head>
 
 <body>
 
-<header>
+<div class="container">
+
 <h1>自己管理シート</h1>
-<p>来所時の体調・時間を記録します</p>
-</header>
 
-<main>
+<div class="date" id="date"></div>
 
-<section class="card">
+<label>来所時間</label>
+<input
+  type="text"
+  id="arrival"
+  class="time-input"
+  inputmode="numeric"
+  maxlength="5"
+  placeholder="例：15:30"
+  autocomplete="off"
+>
 
-<div class="today" id="today"></div>
+<label>帰る時間</label>
+<input
+  type="text"
+  id="leave"
+  class="time-input"
+  inputmode="numeric"
+  maxlength="5"
+  placeholder="例：18:00"
+  autocomplete="off"
+>
 
-<h2>今日の記入</h2>
-
-<label for="arrival">来所時間</label>
-<input id="arrival" type="time">
-
-<label for="leave">帰る時間</label>
-<input id="leave" type="time">
-
-<label for="temp">体温（℃）</label>
-<input id="temp" type="text" inputmode="decimal" placeholder="例：36.5">
-
-<p class="note">
+<label>体温</label>
+<input
+  type="text"
+  id="temp"
+  inputmode="decimal"
+  placeholder="例：36.5"
+  autocomplete="off"
+>
+<div class="note">
 体温は36.5のように「.」を入れて入力してください。
-</p>
+</div>
 
-<div id="health"></div>
+<label>咳</label>
+<div class="choices" id="cough"></div>
 
-<label for="other">その他（必要な場合）</label>
-<textarea id="other" placeholder="気になることがあれば入力"></textarea>
+<label>頭痛</label>
+<div class="choices" id="headache"></div>
 
-<button id="save">記録を保存する</button>
+<label>鼻水</label>
+<div class="choices" id="runny"></div>
 
-<p class="note">
-来所時間・帰る時間・体温・4つの体調項目は入力必須です。
-</p>
+<label>のど痛</label>
+<div class="choices" id="throat"></div>
 
-</section>
+<label>その他</label>
+<textarea id="other" placeholder="気になることがあれば入力してください"></textarea>
 
-</main>
-
-<script>
-
-const d=new Date();
-
-const w=[
-"日",
-"月",
-"火",
-"水",
-"木",
-"金",
-"土"
-];
-
-document.getElementById("today").textContent=
-`${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${w[d.getDay()]}）`;
-
-const fields=[
-["cough","咳"],
-["headache","頭痛"],
-["runny","鼻水"],
-["throat","のど痛"]
-];
-
-const health=document.getElementById("health");
-
-health.innerHTML=fields.map(([n,l])=>`
-
-<label>${l}</label>
-
-<div class="choices">
-
-<label>
-<input type="radio" name="${n}" value="有">
-<span>有</span>
-</label>
-
-<label>
-<input type="radio" name="${n}" value="無">
-<span>無</span>
-</label>
+<button class="save" id="save">保存</button>
 
 </div>
 
-`).join("");
+<script>
 
-/*
-  有・無ボタンの動き
-  ・最初はどちらも未選択
-  ・押した方だけ光る
-  ・光っている方をもう一度押すと未選択に戻る
-*/
+// 今日の日付
+const today = new Date();
 
-document.querySelectorAll(".choices input").forEach(input=>{
+const year = today.getFullYear();
+const month = today.getMonth() + 1;
+const day = today.getDate();
 
-  input.addEventListener("click",function(e){
+const weekdays = ["日","月","火","水","木","金","土"];
 
-    if(this.dataset.selected==="true"){
+document.getElementById("date").textContent =
+  `${year}年${month}月${day}日（${weekdays[today.getDay()]}）`;
 
+
+// 体調項目を作成
+const healthItems = [
+  ["cough", "咳"],
+  ["headache", "頭痛"],
+  ["runny", "鼻水"],
+  ["throat", "のど痛"]
+];
+
+healthItems.forEach(([id, name]) => {
+
+  const box = document.getElementById(id);
+
+  box.innerHTML = `
+    <label class="choice">
+      <input type="radio" name="${id}" value="有">
+      <span>有</span>
+    </label>
+
+    <label class="choice">
+      <input type="radio" name="${id}" value="無">
+      <span>無</span>
+    </label>
+  `;
+
+});
+
+
+// 有・無を押すと選択。
+// 選択中のものをもう一度押すと解除
+document.querySelectorAll(".choices input").forEach(input => {
+
+  input.addEventListener("click", function(e) {
+
+    if (this.dataset.checked === "true") {
+      this.checked = false;
+      this.dataset.checked = "false";
       e.preventDefault();
+    } else {
 
-      this.checked=false;
-
-      this.dataset.selected="false";
-
-    }else{
+      const name = this.name;
 
       document
-      .querySelectorAll(`input[name="${this.name}"]`)
-      .forEach(x=>{
-        x.dataset.selected="false";
-      });
+        .querySelectorAll(`input[name="${name}"]`)
+        .forEach(other => {
+          other.dataset.checked = "false";
+        });
 
-      this.dataset.selected="true";
-
+      this.dataset.checked = "true";
     }
 
   });
@@ -252,75 +240,100 @@ document.querySelectorAll(".choices input").forEach(input=>{
 });
 
 
-document.getElementById("save").addEventListener("click",()=>{
+// 時間入力
+// 15 と入力すると自動的に 15:
+// そのまま 30 と入力すると 15:30 になる
+function setupTimeInput(id) {
 
-  const required=[
-    ["arrival","来所時間"],
-    ["leave","帰る時間"],
-    ["temp","体温"]
-  ];
+  const input = document.getElementById(id);
 
-  for(const [id,name] of required){
+  input.addEventListener("input", function() {
 
-    const el=document.getElementById(id);
+    let value = this.value;
 
-    if(!el.value){
+    // 数字以外を削除
+    value = value.replace(/[^0-9]/g, "");
 
-      alert(`${name}を入力してください。`);
+    // 4桁まで
+    value = value.slice(0, 4);
 
-      el.focus();
-
-      return;
-
+    // 2桁入力されたら : を自動追加
+    if (value.length > 2) {
+      value = value.slice(0, 2) + ":" + value.slice(2);
     }
 
-  }
+    this.value = value;
+
+    // 「15:」まで入力されたら分の位置へ
+    if (value.length === 3) {
+      this.setSelectionRange(3, 3);
+    }
+
+  });
+
+  // キーボードから : を入力しても対応
+  input.addEventListener("blur", function() {
+
+    let value = this.value.replace(/[^0-9]/g, "");
+
+    if (value.length === 3) {
+      value = "0" + value;
+    }
+
+    if (value.length === 4) {
+      this.value =
+        value.slice(0, 2) + ":" + value.slice(2);
+    }
+
+  });
+
+}
+
+setupTimeInput("arrival");
+setupTimeInput("leave");
 
 
-  /*
-    体温チェック
-    36.5 のように
-    「数字2桁 + . + 数字1桁」
-  */
+// 保存
+document.getElementById("save").addEventListener("click", function() {
 
-  const temp=
-  document.getElementById("temp").value.trim();
+  const arrival = document.getElementById("arrival").value;
+  const leave = document.getElementById("leave").value;
+  const temp = document.getElementById("temp").value;
 
-  if(!/^\d{2}\.\d$/.test(temp)){
+  const healthNames = ["cough", "headache", "runny", "throat"];
 
-    alert(
-      "体温は36.5のように「.」を入れて入力してください。"
-    );
-
-    document.getElementById("temp").focus();
-
+  // 必須チェック
+  if (!arrival || !leave || !temp) {
+    alert("来所時間・帰る時間・体温を入力してください。");
     return;
-
   }
 
+  // 時間チェック
+  const timePattern = /^(?:[01]\d|2[0-3]):[0-5]\d$/;
 
-  /*
-    体調項目チェック
-  */
+  if (!timePattern.test(arrival) || !timePattern.test(leave)) {
+    alert("時間は「15:30」のように入力してください。");
+    return;
+  }
 
-  for(const [name,label] of fields){
+  // 体温チェック
+  if (!/^\d{2}\.\d$/.test(temp)) {
+    alert("体温は「36.5」のように「.」を入れて入力してください。");
+    return;
+  }
 
-    if(
-      !document.querySelector(
-        `input[name="${name}"]:checked`
-      )
-    ){
+  // 体調チェック
+  for (const name of healthNames) {
 
-      alert(
-        `${label}の「有」または「無」を選んでください。`
-      );
+    const selected =
+      document.querySelector(`input[name="${name}"]:checked`);
 
+    if (!selected) {
+      alert("体調変化の「有・無」をすべて選択してください。");
       return;
-
     }
 
   }
-
 
   alert("記録を保存しました。");
 
