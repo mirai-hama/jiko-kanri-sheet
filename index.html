@@ -36,8 +36,6 @@ h1 {
   font-weight: bold;
 }
 
-/* ログイン画面 */
-
 #loginScreen h2 {
   text-align: center;
   color: #4b3f9b;
@@ -103,8 +101,6 @@ h1 {
   border: 1px solid #bbb;
   border-radius: 8px;
 }
-
-/* 入力画面 */
 
 #sheetScreen {
   display: none;
@@ -203,8 +199,6 @@ button.save:active {
 
 <div class="container">
 
-<!-- ログイン画面 -->
-
 <div id="loginScreen">
 
 <h1>自己管理シート</h1>
@@ -215,8 +209,6 @@ button.save:active {
 
 </div>
 
-
-<!-- パスワード画面 -->
 
 <div id="passwordScreen">
 
@@ -247,8 +239,6 @@ button.save:active {
 
 </div>
 
-
-<!-- 自己管理シート -->
 
 <div id="sheetScreen">
 
@@ -324,7 +314,28 @@ button.save:active {
 </div>
 
 
+<!-- Supabase -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
+
+/* =========================
+   Supabase設定
+========================= */
+
+const SUPABASE_URL =
+  "https://yiohaakomljvrulaajoy.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_dcqfIAZQTHkG3NbAgvkftw_emYjMZ_F";
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
 
 /* =========================
    利用者設定
@@ -352,12 +363,12 @@ let selectedUser = null;
 
 
 /* =========================
-   利用者一覧を表示
+   利用者一覧
 ========================= */
 
 const userList = document.getElementById("userList");
 
-users.forEach((user, index) => {
+users.forEach((user) => {
 
   const button = document.createElement("button");
 
@@ -583,7 +594,7 @@ setupTimeInput("leave");
    保存
 ========================= */
 
-document.getElementById("save").addEventListener("click", function() {
+document.getElementById("save").addEventListener("click", async function() {
 
   const arrival =
     document.getElementById("arrival").value;
@@ -643,6 +654,9 @@ document.getElementById("save").addEventListener("click", function() {
   ];
 
 
+  const healthValues = {};
+
+
   for (const name of healthNames) {
 
     const selected =
@@ -659,6 +673,48 @@ document.getElementById("save").addEventListener("click", function() {
       return;
 
     }
+
+    healthValues[name] = selected.value;
+
+  }
+
+
+  const recordDate =
+    `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+
+  const other =
+    document.getElementById("other").value;
+
+
+  const { error } =
+    await supabaseClient
+      .from("health_records")
+      .insert([
+        {
+          user_name: selectedUser.name,
+          record_date: recordDate,
+          arrival: arrival,
+          leave: leave,
+          temperature: Number(temp),
+          cough: healthValues.cough,
+          headache: healthValues.headache,
+          runny: healthValues.runny,
+          throat: healthValues.throat,
+          other: other
+        }
+      ]);
+
+
+  if (error) {
+
+    console.error(error);
+
+    alert(
+      "保存できませんでした。\nSupabaseの設定を確認してください。"
+    );
+
+    return;
 
   }
 
