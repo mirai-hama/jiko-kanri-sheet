@@ -6,6 +6,7 @@
 <title>自己管理シート</title>
 
 <style>
+
 body {
   font-family: sans-serif;
   background: #f5f6fa;
@@ -27,6 +28,10 @@ h1 {
   text-align: center;
   color: #4b3f9b;
   margin-bottom: 8px;
+}
+
+h2 {
+  color: #4b3f9b;
 }
 
 .date {
@@ -61,24 +66,40 @@ h1 {
   background: #eee;
 }
 
-#passwordScreen {
+.staff-button {
+  width: 100%;
+  margin-top: 25px;
+  padding: 13px;
+  font-size: 16px;
+  background: #f1effb;
+  color: #4b3f9b;
+  border: 1px solid #c9c2ec;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#passwordScreen,
+#staffLoginScreen,
+#staffScreen,
+#recordScreen {
   display: none;
+}
+
+#passwordScreen,
+#staffLoginScreen {
   text-align: center;
 }
 
-#passwordScreen h2 {
-  color: #4b3f9b;
-}
-
-.password-input {
+.password-input,
+.staff-input {
   width: 100%;
   box-sizing: border-box;
   padding: 13px;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
   border: 1px solid #ccc;
   border-radius: 8px;
-  margin: 15px 0;
+  margin: 10px 0;
 }
 
 .login-button {
@@ -100,10 +121,6 @@ h1 {
   background: white;
   border: 1px solid #bbb;
   border-radius: 8px;
-}
-
-#sheetScreen {
-  display: none;
 }
 
 label {
@@ -192,12 +209,130 @@ button.save {
 button.save:active {
   opacity: 0.8;
 }
+
+
+/* =========================
+   職員画面
+========================= */
+
+.staff-user-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.staff-user-button {
+  padding: 14px 8px;
+  font-size: 16px;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.staff-user-button:active {
+  background: #eee;
+}
+
+.staff-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.staff-header h1 {
+  margin: 0;
+}
+
+.logout-button {
+  padding: 8px 12px;
+  background: white;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.record-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 12px;
+  background: #fafafa;
+}
+
+.record-date {
+  font-size: 17px;
+  font-weight: bold;
+  color: #4b3f9b;
+  margin-bottom: 10px;
+}
+
+.record-row {
+  margin: 6px 0;
+  line-height: 1.5;
+}
+
+.record-label {
+  font-weight: bold;
+}
+
+.no-record {
+  text-align: center;
+  color: #666;
+  padding: 30px 10px;
+}
+
+.loading {
+  text-align: center;
+  padding: 30px 10px;
+  color: #666;
+}
+
+.staff-back {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  background: white;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+
+/* =========================
+   レスポンシブ
+========================= */
+
+@media (max-width: 480px) {
+
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 18px;
+  }
+
+  .record-card {
+    font-size: 15px;
+  }
+
+}
+
 </style>
 </head>
 
 <body>
 
 <div class="container">
+
+
+<!-- =========================
+     利用者ログイン
+========================= -->
 
 <div id="loginScreen">
 
@@ -207,8 +342,16 @@ button.save:active {
 
 <div class="user-list" id="userList"></div>
 
+<button class="staff-button" id="staffButton">
+職員はこちら
+</button>
+
 </div>
 
+
+<!-- =========================
+     利用者パスワード
+========================= -->
 
 <div id="passwordScreen">
 
@@ -239,6 +382,10 @@ button.save:active {
 
 </div>
 
+
+<!-- =========================
+     利用者入力
+========================= -->
 
 <div id="sheetScreen">
 
@@ -311,6 +458,105 @@ button.save:active {
 
 </div>
 
+
+<!-- =========================
+     職員ログイン
+========================= -->
+
+<div id="staffLoginScreen">
+
+<h1>職員用</h1>
+
+<p>職員アカウントでログインしてください</p>
+
+<input
+  type="email"
+  id="staffEmail"
+  class="staff-input"
+  placeholder="メールアドレス"
+  autocomplete="username"
+>
+
+<input
+  type="password"
+  id="staffPassword"
+  class="staff-input"
+  placeholder="パスワード"
+  autocomplete="current-password"
+>
+
+<button class="login-button" id="staffLoginButton">
+職員ログイン
+</button>
+
+<button class="back-button" id="staffLoginBackButton">
+戻る
+</button>
+
+</div>
+
+
+<!-- =========================
+     職員 利用者選択
+========================= -->
+
+<div id="staffScreen">
+
+<div class="staff-header">
+
+<h1>記録確認</h1>
+
+<button class="logout-button" id="staffLogoutButton">
+ログアウト
+</button>
+
+</div>
+
+<p style="text-align:center;">
+確認する利用者を選んでください
+</p>
+
+<div class="staff-user-list" id="staffUserList"></div>
+
+</div>
+
+
+<!-- =========================
+     職員 記録一覧
+========================= -->
+
+<div id="recordScreen">
+
+<div class="staff-header">
+
+<h1>記録一覧</h1>
+
+<button class="logout-button" id="recordLogoutButton">
+ログアウト
+</button>
+
+</div>
+
+<div
+  style="
+    text-align:center;
+    font-size:18px;
+    font-weight:bold;
+    color:#4b3f9b;
+    margin-bottom:20px;
+  "
+  id="recordUserName"
+></div>
+
+<div id="records"></div>
+
+<button class="staff-back" id="recordBackButton">
+利用者選択に戻る
+</button>
+
+</div>
+
+
 </div>
 
 
@@ -363,14 +609,32 @@ let selectedUser = null;
 
 
 /* =========================
+   画面切り替え
+========================= */
+
+function hideAllScreens() {
+
+  document.getElementById("loginScreen").style.display = "none";
+  document.getElementById("passwordScreen").style.display = "none";
+  document.getElementById("sheetScreen").style.display = "none";
+  document.getElementById("staffLoginScreen").style.display = "none";
+  document.getElementById("staffScreen").style.display = "none";
+  document.getElementById("recordScreen").style.display = "none";
+
+}
+
+
+/* =========================
    利用者一覧
 ========================= */
 
-const userList = document.getElementById("userList");
+const userList =
+  document.getElementById("userList");
 
 users.forEach((user) => {
 
-  const button = document.createElement("button");
+  const button =
+    document.createElement("button");
 
   button.className = "user-button";
   button.textContent = user.name;
@@ -379,8 +643,10 @@ users.forEach((user) => {
 
     selectedUser = user;
 
-    document.getElementById("loginScreen").style.display = "none";
-    document.getElementById("passwordScreen").style.display = "block";
+    hideAllScreens();
+
+    document.getElementById("passwordScreen").style.display =
+      "block";
 
     document.getElementById("selectedUser").textContent =
       user.name;
@@ -397,55 +663,72 @@ users.forEach((user) => {
 
 
 /* =========================
-   パスワード確認
+   利用者パスワード確認
 ========================= */
 
-document.getElementById("loginButton").addEventListener("click", () => {
+document
+  .getElementById("loginButton")
+  .addEventListener("click", () => {
 
-  const password =
-    document.getElementById("password").value;
+    const password =
+      document.getElementById("password").value;
 
-  if (password === selectedUser.password) {
+    if (password === selectedUser.password) {
 
-    document.getElementById("passwordScreen").style.display = "none";
-    document.getElementById("sheetScreen").style.display = "block";
+      hideAllScreens();
 
-    document.getElementById("userName").textContent =
-      selectedUser.name;
+      document.getElementById("sheetScreen").style.display =
+        "block";
 
-  } else {
+      document.getElementById("userName").textContent =
+        selectedUser.name;
 
-    alert("パスワードが違います。");
+    } else {
 
-    document.getElementById("password").value = "";
-    document.getElementById("password").focus();
+      alert("パスワードが違います。");
 
-  }
+      document.getElementById("password").value = "";
 
-});
+      document.getElementById("password").focus();
+
+    }
+
+  });
 
 
 /* Enterキーでもログイン */
 
-document.getElementById("password").addEventListener("keydown", (e) => {
+document
+  .getElementById("password")
+  .addEventListener("keydown", (e) => {
 
-  if (e.key === "Enter") {
-    document.getElementById("loginButton").click();
-  }
+    if (e.key === "Enter") {
 
-});
+      document
+        .getElementById("loginButton")
+        .click();
+
+    }
+
+  });
 
 
-/* 名前を選び直す */
+/* =========================
+   名前を選び直す
+========================= */
 
-document.getElementById("backButton").addEventListener("click", () => {
+document
+  .getElementById("backButton")
+  .addEventListener("click", () => {
 
-  selectedUser = null;
+    selectedUser = null;
 
-  document.getElementById("passwordScreen").style.display = "none";
-  document.getElementById("loginScreen").style.display = "block";
+    hideAllScreens();
 
-});
+    document.getElementById("loginScreen").style.display =
+      "block";
+
+  });
 
 
 /* =========================
@@ -458,7 +741,8 @@ const year = today.getFullYear();
 const month = today.getMonth() + 1;
 const day = today.getDate();
 
-const weekdays = ["日","月","火","水","木","金","土"];
+const weekdays =
+  ["日","月","火","水","木","金","土"];
 
 document.getElementById("date").textContent =
   `${year}年${month}月${day}日（${weekdays[today.getDay()]}）`;
@@ -477,53 +761,79 @@ const healthItems = [
 
 healthItems.forEach(([id, name]) => {
 
-  const box = document.getElementById(id);
+  const box =
+    document.getElementById(id);
 
   box.innerHTML = `
+
     <label class="choice">
-      <input type="radio" name="${id}" value="有">
+
+      <input
+        type="radio"
+        name="${id}"
+        value="有"
+      >
+
       <span>有</span>
+
     </label>
 
     <label class="choice">
-      <input type="radio" name="${id}" value="無">
+
+      <input
+        type="radio"
+        name="${id}"
+        value="無"
+      >
+
       <span>無</span>
+
     </label>
+
   `;
 
 });
 
 
-/* 有・無の選択・解除 */
+/* =========================
+   有・無の選択・解除
+========================= */
 
-document.querySelectorAll(".choices input").forEach(input => {
+document
+  .querySelectorAll(".choices input")
+  .forEach(input => {
 
-  input.addEventListener("click", function(e) {
+    input.addEventListener("click", function(e) {
 
-    if (this.dataset.checked === "true") {
+      if (this.dataset.checked === "true") {
 
-      this.checked = false;
-      this.dataset.checked = "false";
+        this.checked = false;
 
-      e.preventDefault();
+        this.dataset.checked = "false";
 
-    } else {
+        e.preventDefault();
 
-      const name = this.name;
+      } else {
 
-      document
-        .querySelectorAll(`input[name="${name}"]`)
-        .forEach(other => {
-          other.dataset.checked = "false";
-        });
+        const name = this.name;
 
-      this.dataset.checked = "true";
+        document
+          .querySelectorAll(
+            `input[name="${name}"]`
+          )
+          .forEach(other => {
 
-    }
+            other.dataset.checked = "false";
+
+          });
+
+        this.dataset.checked = "true";
+
+      }
+
+    });
 
   });
-
-});
 
 
 /* =========================
@@ -532,15 +842,18 @@ document.querySelectorAll(".choices input").forEach(input => {
 
 function setupTimeInput(id) {
 
-  const input = document.getElementById(id);
+  const input =
+    document.getElementById(id);
 
   input.addEventListener("input", function() {
 
     let value = this.value;
 
-    value = value.replace(/[^0-9]/g, "");
+    value =
+      value.replace(/[^0-9]/g, "");
 
-    value = value.slice(0, 4);
+    value =
+      value.slice(0, 4);
 
     if (value.length > 2) {
 
@@ -569,7 +882,8 @@ function setupTimeInput(id) {
 
     if (value.length === 3) {
 
-      value = "0" + value;
+      value =
+        "0" + value;
 
     }
 
@@ -586,6 +900,7 @@ function setupTimeInput(id) {
 
 }
 
+
 setupTimeInput("arrival");
 setupTimeInput("leave");
 
@@ -594,134 +909,514 @@ setupTimeInput("leave");
    保存
 ========================= */
 
-document.getElementById("save").addEventListener("click", async function() {
+document
+  .getElementById("save")
+  .addEventListener("click", async function() {
 
-  const arrival =
-    document.getElementById("arrival").value;
+    const arrival =
+      document.getElementById("arrival").value;
 
-  const leave =
-    document.getElementById("leave").value;
+    const leave =
+      document.getElementById("leave").value;
 
-  const temp =
-    document.getElementById("temp").value;
-
-
-  if (!arrival || !leave || !temp) {
-
-    alert(
-      "来所時間・帰る時間・体温を入力してください。"
-    );
-
-    return;
-
-  }
+    const temp =
+      document.getElementById("temp").value;
 
 
-  const timePattern =
-    /^(?:[01]\d|2[0-3]):[0-5]\d$/;
-
-
-  if (
-    !timePattern.test(arrival) ||
-    !timePattern.test(leave)
-  ) {
-
-    alert(
-      "時間は「15:30」のように入力してください。"
-    );
-
-    return;
-
-  }
-
-
-  if (!/^\d{2}\.\d$/.test(temp)) {
-
-    alert(
-      "体温は「36.5」のように「.」を入れて入力してください。"
-    );
-
-    return;
-
-  }
-
-
-  const healthNames = [
-    "cough",
-    "headache",
-    "runny",
-    "throat"
-  ];
-
-
-  const healthValues = {};
-
-
-  for (const name of healthNames) {
-
-    const selected =
-      document.querySelector(
-        `input[name="${name}"]:checked`
-      );
-
-    if (!selected) {
+    if (!arrival || !leave || !temp) {
 
       alert(
-        "体調変化の「有・無」をすべて選択してください。"
+        "来所時間・帰る時間・体温を入力してください。"
       );
 
       return;
 
     }
 
-    healthValues[name] = selected.value;
 
-  }
-
-
-  const recordDate =
-    `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    const timePattern =
+      /^(?:[01]\d|2[0-3]):[0-5]\d$/;
 
 
-  const other =
-    document.getElementById("other").value;
+    if (
+      !timePattern.test(arrival) ||
+      !timePattern.test(leave)
+    ) {
+
+      alert(
+        "時間は「15:30」のように入力してください。"
+      );
+
+      return;
+
+    }
 
 
-  const { error } =
+    if (!/^\d{2}\.\d$/.test(temp)) {
+
+      alert(
+        "体温は「36.5」のように「.」を入れて入力してください。"
+      );
+
+      return;
+
+    }
+
+
+    const healthNames = [
+      "cough",
+      "headache",
+      "runny",
+      "throat"
+    ];
+
+
+    const healthValues = {};
+
+
+    for (const name of healthNames) {
+
+      const selected =
+        document.querySelector(
+          `input[name="${name}"]:checked`
+        );
+
+      if (!selected) {
+
+        alert(
+          "体調変化の「有・無」をすべて選択してください。"
+        );
+
+        return;
+
+      }
+
+      healthValues[name] =
+        selected.value;
+
+    }
+
+
+    const recordDate =
+      `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+
+    const other =
+      document.getElementById("other").value;
+
+
+    const { error } =
+      await supabaseClient
+        .from("health_records")
+        .insert([
+          {
+            user_name:
+              selectedUser.name,
+
+            record_date:
+              recordDate,
+
+            arrival:
+              arrival,
+
+            leave:
+              leave,
+
+            temperature:
+              Number(temp),
+
+            cough:
+              healthValues.cough,
+
+            headache:
+              healthValues.headache,
+
+            runny:
+              healthValues.runny,
+
+            throat:
+              healthValues.throat,
+
+            other:
+              other
+          }
+        ]);
+
+
+    if (error) {
+
+      console.error(error);
+
+      alert(
+        "保存できませんでした。\n" +
+        error.message
+      );
+
+      return;
+
+    }
+
+
+    alert("記録を保存しました。");
+
+  });
+
+
+/* =====================================================
+   職員用
+===================================================== */
+
+
+/* =========================
+   職員ログイン画面へ
+========================= */
+
+document
+  .getElementById("staffButton")
+  .addEventListener("click", () => {
+
+    hideAllScreens();
+
+    document
+      .getElementById("staffLoginScreen")
+      .style.display = "block";
+
+    document
+      .getElementById("staffEmail")
+      .focus();
+
+  });
+
+
+/* =========================
+   職員ログイン
+========================= */
+
+document
+  .getElementById("staffLoginButton")
+  .addEventListener("click", async () => {
+
+    const email =
+      document.getElementById("staffEmail").value.trim();
+
+    const password =
+      document.getElementById("staffPassword").value;
+
+
+    if (!email || !password) {
+
+      alert(
+        "メールアドレスとパスワードを入力してください。"
+      );
+
+      return;
+
+    }
+
+
+    const { error } =
+      await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+
+    if (error) {
+
+      console.error(error);
+
+      alert(
+        "ログインできませんでした。\n" +
+        error.message
+      );
+
+      return;
+
+    }
+
+
+    document.getElementById("staffEmail").value = "";
+    document.getElementById("staffPassword").value = "";
+
+    showStaffScreen();
+
+  });
+
+
+/* =========================
+   職員画面表示
+========================= */
+
+function showStaffScreen() {
+
+  hideAllScreens();
+
+  document
+    .getElementById("staffScreen")
+    .style.display = "block";
+
+}
+
+
+/* =========================
+   職員ログイン画面から戻る
+========================= */
+
+document
+  .getElementById("staffLoginBackButton")
+  .addEventListener("click", async () => {
+
+    await supabaseClient.auth.signOut();
+
+    hideAllScreens();
+
+    document
+      .getElementById("loginScreen")
+      .style.display = "block";
+
+  });
+
+
+/* =========================
+   職員用 利用者一覧
+========================= */
+
+const staffUserList =
+  document.getElementById("staffUserList");
+
+
+users.forEach((user) => {
+
+  const button =
+    document.createElement("button");
+
+  button.className =
+    "staff-user-button";
+
+  button.textContent =
+    user.name;
+
+  button.addEventListener("click", () => {
+
+    loadRecords(user.name);
+
+  });
+
+  staffUserList.appendChild(button);
+
+});
+
+
+/* =========================
+   記録取得
+========================= */
+
+async function loadRecords(userName) {
+
+  hideAllScreens();
+
+  document
+    .getElementById("recordScreen")
+    .style.display = "block";
+
+  document
+    .getElementById("recordUserName")
+    .textContent =
+      `${userName}さんの記録`;
+
+  const records =
+    document.getElementById("records");
+
+  records.innerHTML =
+    `<div class="loading">記録を読み込んでいます……</div>`;
+
+
+  const { data, error } =
     await supabaseClient
       .from("health_records")
-      .insert([
-        {
-          user_name: selectedUser.name,
-          record_date: recordDate,
-          arrival: arrival,
-          leave: leave,
-          temperature: Number(temp),
-          cough: healthValues.cough,
-          headache: healthValues.headache,
-          runny: healthValues.runny,
-          throat: healthValues.throat,
-          other: other
-        }
-      ]);
+      .select("*")
+      .eq("user_name", userName)
+      .order("record_date", {
+        ascending: false
+      });
 
 
   if (error) {
 
     console.error(error);
 
-    alert(
-      "保存できませんでした。\nSupabaseの設定を確認してください。"
-    );
+    records.innerHTML =
+      `<div class="no-record">
+        記録を読み込めませんでした。<br><br>
+        ${error.message}
+      </div>`;
 
     return;
 
   }
 
 
-  alert("記録を保存しました。");
+  if (!data || data.length === 0) {
 
-});
+    records.innerHTML =
+      `<div class="no-record">
+        この利用者の記録はありません。
+      </div>`;
+
+    return;
+
+  }
+
+
+  records.innerHTML = "";
+
+
+  data.forEach(record => {
+
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "record-card";
+
+
+    const dateParts =
+      record.record_date
+        ? record.record_date.split("-")
+        : [];
+
+
+    let displayDate =
+      record.record_date || "";
+
+
+    if (dateParts.length === 3) {
+
+      displayDate =
+        `${Number(dateParts[1])}月${Number(dateParts[2])}日`;
+
+    }
+
+
+    card.innerHTML = `
+
+      <div class="record-date">
+        ${displayDate}
+      </div>
+
+      <div class="record-row">
+        <span class="record-label">来所：</span>
+        ${record.arrival || ""}
+      </div>
+
+      <div class="record-row">
+        <span class="record-label">帰る：</span>
+        ${record.leave || ""}
+      </div>
+
+      <div class="record-row">
+        <span class="record-label">体温：</span>
+        ${record.temperature ?? ""}
+      </div>
+
+      <div class="record-row">
+        <span class="record-label">咳：</span>
+        ${record.cough || ""}
+      </div>
+
+      <div class="record-row">
+        <span class="record-label">頭痛：</span>
+        ${record.headache || ""}
+      </div>
+
+      <div class="record-row">
+        <span class="record-label">鼻水：</span>
+        ${record.runny || ""}
+      </div>
+
+      <div class="record-row">
+        <span class="record-label">のど痛：</span>
+        ${record.throat || ""}
+      </div>
+
+      <div class="record-row">
+        <span class="record-label">その他：</span>
+        ${record.other || "なし"}
+      </div>
+
+    `;
+
+
+    records.appendChild(card);
+
+  });
+
+}
+
+
+/* =========================
+   記録画面 → 利用者選択
+========================= */
+
+document
+  .getElementById("recordBackButton")
+  .addEventListener("click", () => {
+
+    showStaffScreen();
+
+  });
+
+
+/* =========================
+   職員ログアウト
+========================= */
+
+async function staffLogout() {
+
+  await supabaseClient.auth.signOut();
+
+  hideAllScreens();
+
+  document
+    .getElementById("loginScreen")
+    .style.display = "block";
+
+}
+
+
+document
+  .getElementById("staffLogoutButton")
+  .addEventListener(
+    "click",
+    staffLogout
+  );
+
+
+document
+  .getElementById("recordLogoutButton")
+  .addEventListener(
+    "click",
+    staffLogout
+  );
+
+
+/* =========================
+   職員ログイン Enterキー
+========================= */
+
+document
+  .getElementById("staffPassword")
+  .addEventListener("keydown", (e) => {
+
+    if (e.key === "Enter") {
+
+      document
+        .getElementById("staffLoginButton")
+        .click();
+
+    }
+
+  });
 
 </script>
 
