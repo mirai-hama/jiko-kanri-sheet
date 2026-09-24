@@ -658,8 +658,21 @@ button.save {
     type="text"
     id="newUserName"
     class="form-input"
-    placeholder="利用者名"
+    placeholder="例：山田 太郎"
   >
+
+  <label>ふりがな</label>
+
+  <input
+    type="text"
+    id="newUserFurigana"
+    class="form-input"
+    placeholder="例：やまだ たろう"
+  >
+
+  <div class="form-note">
+    苗字と名前の間にスペースを入れてください。
+  </div>
 
   <label>ログインパスワード</label>
 
@@ -814,6 +827,30 @@ function hideAllScreens() {
 
 
 /* =========================
+   ふりがな順に並べ替え
+========================= */
+
+function sortUsersByFurigana(users) {
+
+  return users.sort((a, b) => {
+
+    const aFurigana =
+      String(a.furigana || "").trim();
+
+    const bFurigana =
+      String(b.furigana || "").trim();
+
+    return aFurigana.localeCompare(
+      bFurigana,
+      "ja"
+    );
+
+  });
+
+}
+
+
+/* =========================
    利用者一覧取得
 ========================= */
 
@@ -833,9 +870,8 @@ async function loadUsers() {
   const { data, error } =
     await supabaseClient
       .from("users")
-      .select("id,name,password,is_active")
-      .eq("is_active", true)
-      .order("name");
+      .select("id,name,furigana,password,is_active")
+      .eq("is_active", true);
 
 
   loading.style.display = "none";
@@ -868,6 +904,9 @@ async function loadUsers() {
     return;
 
   }
+
+
+  sortUsersByFurigana(data);
 
 
   data.forEach(user => {
@@ -1497,9 +1536,8 @@ async function loadStaffUsers() {
   const { data, error } =
     await supabaseClient
       .from("users")
-      .select("id,name,is_active")
-      .eq("is_active", true)
-      .order("name");
+      .select("id,name,furigana,is_active")
+      .eq("is_active", true);
 
 
   if (error) {
@@ -1527,6 +1565,9 @@ async function loadStaffUsers() {
     return;
 
   }
+
+
+  sortUsersByFurigana(data);
 
 
   list.innerHTML = "";
@@ -1575,6 +1616,10 @@ document
       .value = "";
 
     document
+      .getElementById("newUserFurigana")
+      .value = "";
+
+    document
       .getElementById("newUserPassword")
       .value = "";
 
@@ -1599,6 +1644,12 @@ document
         .value
         .trim();
 
+    const furigana =
+      document
+        .getElementById("newUserFurigana")
+        .value
+        .trim();
+
     const password =
       document
         .getElementById("newUserPassword")
@@ -1609,6 +1660,15 @@ document
     if (!name) {
 
       alert("利用者名を入力してください。");
+
+      return;
+
+    }
+
+
+    if (!furigana) {
+
+      alert("ふりがなを入力してください。");
 
       return;
 
@@ -1666,6 +1726,9 @@ document
           {
             name:
               name,
+
+            furigana:
+              furigana,
 
             password:
               password,
@@ -1749,9 +1812,8 @@ async function loadInactiveUsers() {
   const { data, error } =
     await supabaseClient
       .from("users")
-      .select("id,name,is_active")
-      .eq("is_active", false)
-      .order("name");
+      .select("id,name,furigana,is_active")
+      .eq("is_active", false);
 
 
   if (error) {
@@ -1779,6 +1841,9 @@ async function loadInactiveUsers() {
     return;
 
   }
+
+
+  sortUsersByFurigana(data);
 
 
   list.innerHTML = "";
