@@ -6,7 +6,6 @@
 <title>自己管理シート</title>
 
 <style>
-
 body {
   font-family: sans-serif;
   background: #f5f6fa;
@@ -41,12 +40,16 @@ h2 {
   font-weight: bold;
 }
 
-#loginScreen h2 {
-  text-align: center;
-  color: #4b3f9b;
-  margin-bottom: 20px;
+/* 共通画面 */
+#passwordScreen,
+#sheetScreen,
+#staffLoginScreen,
+#staffScreen,
+#recordScreen {
+  display: none;
 }
 
+/* 利用者一覧 */
 .user-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -66,6 +69,7 @@ h2 {
   background: #eee;
 }
 
+/* 職員ボタン */
 .staff-button {
   width: 100%;
   margin-top: 25px;
@@ -78,13 +82,7 @@ h2 {
   cursor: pointer;
 }
 
-#passwordScreen,
-#staffLoginScreen,
-#staffScreen,
-#recordScreen {
-  display: none;
-}
-
+/* パスワード */
 #passwordScreen,
 #staffLoginScreen {
   text-align: center;
@@ -123,6 +121,7 @@ h2 {
   border-radius: 8px;
 }
 
+/* 入力 */
 label {
   display: block;
   margin-top: 18px;
@@ -206,15 +205,7 @@ button.save {
   cursor: pointer;
 }
 
-button.save:active {
-  opacity: 0.8;
-}
-
-
-/* =========================
-   職員画面
-========================= */
-
+/* 職員画面 */
 .staff-user-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -279,16 +270,11 @@ button.save:active {
   font-weight: bold;
 }
 
-.no-record {
-  text-align: center;
-  color: #666;
-  padding: 30px 10px;
-}
-
+.no-record,
 .loading {
   text-align: center;
-  padding: 30px 10px;
   color: #666;
+  padding: 30px 10px;
 }
 
 .staff-back {
@@ -301,13 +287,7 @@ button.save:active {
   font-size: 16px;
 }
 
-
-/* =========================
-   レスポンシブ
-========================= */
-
 @media (max-width: 480px) {
-
   body {
     padding: 10px;
   }
@@ -319,9 +299,7 @@ button.save:active {
   .record-card {
     font-size: 15px;
   }
-
 }
-
 </style>
 </head>
 
@@ -329,22 +307,23 @@ button.save:active {
 
 <div class="container">
 
-
 <!-- =========================
-     利用者ログイン
+     トップページ
 ========================= -->
 
 <div id="loginScreen">
 
-<h1>自己管理シート</h1>
+  <h1>自己管理シート</h1>
 
-<h2>自分の名前を選んでください</h2>
+  <h2 style="text-align:center;">
+    自分の名前を選んでください
+  </h2>
 
-<div class="user-list" id="userList"></div>
+  <div class="user-list" id="userList"></div>
 
-<button class="staff-button" id="staffButton">
-職員はこちら
-</button>
+  <button class="staff-button" id="staffButton">
+    職員はこちら
+  </button>
 
 </div>
 
@@ -355,106 +334,109 @@ button.save:active {
 
 <div id="passwordScreen">
 
-<h1>自己管理シート</h1>
+  <h1>自己管理シート</h1>
 
-<h2 id="selectedUser"></h2>
+  <h2 id="selectedUser"></h2>
 
-<p>パスワードを入力してください</p>
+  <p>パスワードを入力してください</p>
 
-<input
-  type="password"
-  id="password"
-  class="password-input"
-  inputmode="numeric"
-  maxlength="8"
-  placeholder="パスワード"
->
+  <input
+    type="password"
+    id="password"
+    class="password-input"
+    inputmode="numeric"
+    maxlength="8"
+    placeholder="パスワード"
+  >
 
-<button class="login-button" id="loginButton">
-ログイン
-</button>
+  <button class="login-button" id="loginButton">
+    ログイン
+  </button>
 
-<br>
+  <br>
 
-<button class="back-button" id="backButton">
-名前を選び直す
-</button>
+  <button class="back-button" id="backButton">
+    名前を選び直す
+  </button>
 
 </div>
 
 
 <!-- =========================
-     利用者入力
+     今日の自己管理
 ========================= -->
 
 <div id="sheetScreen">
 
-<h1>自己管理シート</h1>
+  <h1>自己管理シート</h1>
 
-<div class="date" id="date"></div>
+  <div class="date" id="date"></div>
 
-<div style="text-align:center; font-weight:bold;" id="userName"></div>
+  <div
+    style="text-align:center; font-weight:bold;"
+    id="userName"
+  ></div>
 
-<label>来所時間</label>
+  <label>来所時間</label>
 
-<input
-  type="text"
-  id="arrival"
-  class="time-input"
-  inputmode="numeric"
-  maxlength="5"
-  placeholder="例：15:30"
-  autocomplete="off"
->
+  <input
+    type="text"
+    id="arrival"
+    class="time-input"
+    inputmode="numeric"
+    maxlength="5"
+    placeholder="例：15:30"
+    autocomplete="off"
+  >
 
-<label>帰る時間</label>
+  <label>帰所時間</label>
 
-<input
-  type="text"
-  id="leave"
-  class="time-input"
-  inputmode="numeric"
-  maxlength="5"
-  placeholder="例：18:00"
-  autocomplete="off"
->
+  <input
+    type="text"
+    id="leave"
+    class="time-input"
+    inputmode="numeric"
+    maxlength="5"
+    placeholder="例：18:00"
+    autocomplete="off"
+  >
 
-<label>体温</label>
+  <label>体温</label>
 
-<input
-  type="text"
-  id="temp"
-  inputmode="decimal"
-  placeholder="例：36.5"
-  autocomplete="off"
->
+  <input
+    type="text"
+    id="temp"
+    inputmode="decimal"
+    placeholder="例：36.5"
+    autocomplete="off"
+  >
 
-<div class="note">
-体温は36.5のように「.」を入れて入力してください。
-</div>
+  <div class="note">
+    体温は36.5のように「.」を入れて入力してください。
+  </div>
 
-<label>咳</label>
-<div class="choices" id="cough"></div>
+  <label>咳</label>
+  <div class="choices" id="cough"></div>
 
-<label>頭痛</label>
-<div class="choices" id="headache"></div>
+  <label>頭痛</label>
+  <div class="choices" id="headache"></div>
 
-<label>鼻水</label>
-<div class="choices" id="runny"></div>
+  <label>鼻水</label>
+  <div class="choices" id="runny"></div>
 
-<label>のど痛</label>
-<div class="choices" id="throat"></div>
+  <label>のど痛</label>
+  <div class="choices" id="throat"></div>
 
-<label>その他</label>
+  <label>その他</label>
 
-<textarea
-  id="other"
-  placeholder="気になることがあれば入力してください"
-></textarea>
+  <textarea
+    id="other"
+    placeholder="気になることがあれば入力してください"
+  ></textarea>
 
-<button class="save" id="save">
-保存
-</button>
+  <button class="save" id="save">
+    保存
+  </button>
 
 </div>
 
@@ -465,33 +447,25 @@ button.save:active {
 
 <div id="staffLoginScreen">
 
-<h1>職員用</h1>
+  <h1>職員用</h1>
 
-<p>職員アカウントでログインしてください</p>
+  <p>職員用パスワードを入力してください</p>
 
-<input
-  type="email"
-  id="staffEmail"
-  class="staff-input"
-  placeholder="メールアドレス"
-  autocomplete="username"
->
+  <input
+    type="password"
+    id="staffPassword"
+    class="staff-input"
+    placeholder="パスワード"
+    autocomplete="current-password"
+  >
 
-<input
-  type="password"
-  id="staffPassword"
-  class="staff-input"
-  placeholder="パスワード"
-  autocomplete="current-password"
->
+  <button class="login-button" id="staffLoginButton">
+    職員ログイン
+  </button>
 
-<button class="login-button" id="staffLoginButton">
-職員ログイン
-</button>
-
-<button class="back-button" id="staffLoginBackButton">
-戻る
-</button>
+  <button class="back-button" id="staffLoginBackButton">
+    戻る
+  </button>
 
 </div>
 
@@ -502,21 +476,24 @@ button.save:active {
 
 <div id="staffScreen">
 
-<div class="staff-header">
+  <div class="staff-header">
 
-<h1>記録確認</h1>
+    <h1>記録確認</h1>
 
-<button class="logout-button" id="staffLogoutButton">
-ログアウト
-</button>
+    <button class="logout-button" id="staffLogoutButton">
+      ログアウト
+    </button>
 
-</div>
+  </div>
 
-<p style="text-align:center;">
-確認する利用者を選んでください
-</p>
+  <p style="text-align:center;">
+    確認する利用者を選んでください
+  </p>
 
-<div class="staff-user-list" id="staffUserList"></div>
+  <div
+    class="staff-user-list"
+    id="staffUserList"
+  ></div>
 
 </div>
 
@@ -527,40 +504,41 @@ button.save:active {
 
 <div id="recordScreen">
 
-<div class="staff-header">
+  <div class="staff-header">
 
-<h1>記録一覧</h1>
+    <h1>記録一覧</h1>
 
-<button class="logout-button" id="recordLogoutButton">
-ログアウト
-</button>
+    <button class="logout-button" id="recordLogoutButton">
+      ログアウト
+    </button>
 
-</div>
+  </div>
 
-<div
-  style="
-    text-align:center;
-    font-size:18px;
-    font-weight:bold;
-    color:#4b3f9b;
-    margin-bottom:20px;
-  "
-  id="recordUserName"
-></div>
+  <div
+    style="
+      text-align:center;
+      font-size:18px;
+      font-weight:bold;
+      color:#4b3f9b;
+      margin-bottom:20px;
+    "
+    id="recordUserName"
+  ></div>
 
-<div id="records"></div>
+  <div id="records"></div>
 
-<button class="staff-back" id="recordBackButton">
-利用者選択に戻る
-</button>
-
-</div>
-
+  <button class="staff-back" id="recordBackButton">
+    利用者選択に戻る
+  </button>
 
 </div>
 
+</div>
 
-<!-- Supabase -->
+
+<!-- =========================
+     Supabase
+========================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -583,6 +561,19 @@ const supabaseClient =
   );
 
 
+/*
+  職員用Supabaseアカウントのメールアドレス。
+
+  職員は画面でメールアドレスを入力しません。
+
+  あとでSupabaseのAuthenticationに作る
+  職員アカウントのメールアドレスと
+  ここを同じにします。
+*/
+
+const STAFF_EMAIL = "staff@example.com";
+
+
 /* =========================
    利用者設定
 ========================= */
@@ -603,7 +594,6 @@ const users = [
   { name: "Mさん", password: "1234" },
   { name: "Nさん", password: "1234" }
 ];
-
 
 let selectedUser = null;
 
@@ -663,7 +653,7 @@ users.forEach((user) => {
 
 
 /* =========================
-   利用者パスワード確認
+   利用者パスワード
 ========================= */
 
 document
@@ -900,7 +890,6 @@ function setupTimeInput(id) {
 
 }
 
-
 setupTimeInput("arrival");
 setupTimeInput("leave");
 
@@ -926,7 +915,7 @@ document
     if (!arrival || !leave || !temp) {
 
       alert(
-        "来所時間・帰る時間・体温を入力してください。"
+        "来所時間・帰所時間・体温を入力してください。"
       );
 
       return;
@@ -1082,7 +1071,11 @@ document
       .style.display = "block";
 
     document
-      .getElementById("staffEmail")
+      .getElementById("staffPassword")
+      .value = "";
+
+    document
+      .getElementById("staffPassword")
       .focus();
 
   });
@@ -1096,17 +1089,14 @@ document
   .getElementById("staffLoginButton")
   .addEventListener("click", async () => {
 
-    const email =
-      document.getElementById("staffEmail").value.trim();
-
     const password =
       document.getElementById("staffPassword").value;
 
 
-    if (!email || !password) {
+    if (!password) {
 
       alert(
-        "メールアドレスとパスワードを入力してください。"
+        "職員用パスワードを入力してください。"
       );
 
       return;
@@ -1116,8 +1106,11 @@ document
 
     const { error } =
       await supabaseClient.auth.signInWithPassword({
-        email: email,
+
+        email: STAFF_EMAIL,
+
         password: password
+
       });
 
 
@@ -1135,7 +1128,6 @@ document
     }
 
 
-    document.getElementById("staffEmail").value = "";
     document.getElementById("staffPassword").value = "";
 
     showStaffScreen();
@@ -1219,16 +1211,21 @@ async function loadRecords(userName) {
     .getElementById("recordScreen")
     .style.display = "block";
 
+
   document
     .getElementById("recordUserName")
     .textContent =
-      `${userName}さんの記録`;
+      `${userName}の記録`;
+
 
   const records =
     document.getElementById("records");
 
+
   records.innerHTML =
-    `<div class="loading">記録を読み込んでいます……</div>`;
+    `<div class="loading">
+      記録を読み込んでいます……
+    </div>`;
 
 
   const { data, error } =
@@ -1293,7 +1290,7 @@ async function loadRecords(userName) {
     if (dateParts.length === 3) {
 
       displayDate =
-        `${Number(dateParts[1])}月${Number(dateParts[2])}日`;
+        `${Number(dateParts[0])}年${Number(dateParts[1])}月${Number(dateParts[2])}日`;
 
     }
 
@@ -1310,7 +1307,7 @@ async function loadRecords(userName) {
       </div>
 
       <div class="record-row">
-        <span class="record-label">帰る：</span>
+        <span class="record-label">帰所：</span>
         ${record.leave || ""}
       </div>
 
