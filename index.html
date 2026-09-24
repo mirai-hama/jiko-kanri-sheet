@@ -876,6 +876,8 @@ function sortUsersByFurigana(users) {
 
 /* =========================
    利用者一覧取得
+   ※読み込みが一時的に0件になった場合は
+     最大3回まで再取得する
 ========================= */
 
 async function loadUsers() {
@@ -891,87 +893,132 @@ async function loadUsers() {
   loading.style.display = "block";
 
 
-  const { data, error } =
-    await supabaseClient
-      .from("users")
-      .select("id,name,furigana,password,is_active")
-      .eq("is_active", true);
+  for (let attempt = 1; attempt <= 3; attempt++) {
+
+    const { data, error } =
+      await supabaseClient
+        .from("users")
+        .select("id,name,furigana,password,is_active")
+        .eq("is_active", true);
+
+
+    if (error) {
+
+      console.error(
+        `利用者一覧取得エラー（${attempt}回目）`,
+        error
+      );
+
+
+      if (attempt === 3) {
+
+        loading.style.display = "none";
+
+        userList.innerHTML = `
+          <div class="no-record">
+            利用者一覧を読み込めませんでした。<br><br>
+            ${error.message}
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      await new Promise(resolve =>
+        setTimeout(resolve, 700)
+      );
+
+      continue;
+
+    }
+
+
+    if (data && data.length > 0) {
+
+      loading.style.display = "none";
+
+      sortUsersByFurigana(data);
+
+
+      data.forEach(user => {
+
+        const button =
+          document.createElement("button");
+
+        button.className =
+          "user-button";
+
+        button.textContent =
+          user.name;
+
+
+        button.addEventListener("click", () => {
+
+          selectedUser = user;
+
+          hideAllScreens();
+
+
+          document
+            .getElementById("passwordScreen")
+            .style.display = "block";
+
+
+          document
+            .getElementById("selectedUser")
+            .textContent =
+              user.name;
+
+
+          document
+            .getElementById("password")
+            .value = "";
+
+
+          document
+            .getElementById("password")
+            .focus();
+
+        });
+
+
+        userList.appendChild(button);
+
+      });
+
+
+      return;
+
+    }
+
+
+    // 0件だった場合
+    if (attempt < 3) {
+
+      console.log(
+        `利用者が0件だったため再取得します（${attempt}回目）`
+      );
+
+
+      await new Promise(resolve =>
+        setTimeout(resolve, 700)
+      );
+
+    }
+
+  }
 
 
   loading.style.display = "none";
 
 
-  if (error) {
-
-    console.error(error);
-
-    userList.innerHTML = `
-      <div class="no-record">
-        利用者一覧を読み込めませんでした。<br><br>
-        ${error.message}
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  if (!data || data.length === 0) {
-
-    userList.innerHTML = `
-      <div class="no-record">
-        利用者が登録されていません。
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  sortUsersByFurigana(data);
-
-
-  data.forEach(user => {
-
-    const button =
-      document.createElement("button");
-
-    button.className =
-      "user-button";
-
-    button.textContent =
-      user.name;
-
-    button.addEventListener("click", () => {
-
-      selectedUser = user;
-
-      hideAllScreens();
-
-      document
-        .getElementById("passwordScreen")
-        .style.display = "block";
-
-      document
-        .getElementById("selectedUser")
-        .textContent =
-          user.name;
-
-      document
-        .getElementById("password")
-        .value = "";
-
-      document
-        .getElementById("password")
-        .focus();
-
-    });
-
-    userList.appendChild(button);
-
-  });
+  userList.innerHTML = `
+    <div class="no-record">
+      利用者が登録されていません。
+    </div>
+  `;
 
 }
 
