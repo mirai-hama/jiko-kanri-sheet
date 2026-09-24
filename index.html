@@ -227,23 +227,43 @@ button.save {
 ========================= */
 
 .staff-user-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
   margin-top: 20px;
 }
 
-.staff-user-button {
-  padding: 14px 8px;
-  font-size: 16px;
+.staff-user-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 12px;
+  background: #fafafa;
+}
+
+.staff-user-name {
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.staff-user-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.record-view-button {
+  flex: 1;
+  padding: 10px;
+  font-size: 15px;
   background: white;
-  border: 2px solid #ddd;
-  border-radius: 10px;
+  border: 1px solid #bbb;
+  color: #4b3f9b;
+  border-radius: 8px;
   cursor: pointer;
 }
 
-.staff-user-button:active {
-  background: #eee;
+.record-view-button:active {
+  background: #f1effb;
 }
 
 .staff-header {
@@ -417,6 +437,10 @@ button.save {
 
   .record-card {
     font-size: 15px;
+  }
+
+  .staff-user-actions {
+    flex-direction: column;
   }
 
 }
@@ -955,6 +979,12 @@ async function loadUsers() {
 /* =========================
    初期表示
 ========================= */
+
+hideAllScreens();
+
+document
+  .getElementById("loginScreen")
+  .style.display = "block";
 
 loadUsers();
 
@@ -1575,22 +1605,62 @@ async function loadStaffUsers() {
 
   data.forEach(user => {
 
-    const button =
-      document.createElement("button");
+    const card =
+      document.createElement("div");
 
-    button.className =
-      "staff-user-button";
+    card.className =
+      "staff-user-card";
 
-    button.textContent =
-      user.name;
 
-    button.addEventListener("click", () => {
+    card.innerHTML = `
+
+      <div class="staff-user-name">
+        ${user.name}
+      </div>
+
+      <div class="staff-user-actions">
+
+        <button
+          class="record-view-button"
+        >
+          記録を見る
+        </button>
+
+        <button
+          class="stop-button"
+        >
+          利用停止
+        </button>
+
+      </div>
+
+    `;
+
+
+    const recordButton =
+      card.querySelector(".record-view-button");
+
+    recordButton.addEventListener("click", () => {
 
       loadRecords(user.name);
 
     });
 
-    list.appendChild(button);
+
+    const stopButton =
+      card.querySelector(".stop-button");
+
+    stopButton.addEventListener("click", () => {
+
+      stopUser(
+        user.id,
+        user.name
+      );
+
+    });
+
+
+    list.appendChild(card);
 
   });
 
@@ -1868,7 +1938,6 @@ async function loadInactiveUsers() {
 
         <button
           class="resume-button"
-          data-id="${user.id}"
         >
           利用再開
         </button>
