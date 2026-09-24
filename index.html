@@ -40,16 +40,24 @@ h2 {
   font-weight: bold;
 }
 
-/* 共通画面 */
+/* =========================
+   画面
+========================= */
+
 #passwordScreen,
 #sheetScreen,
 #staffLoginScreen,
 #staffScreen,
-#recordScreen {
+#recordScreen,
+#addUserScreen,
+#inactiveUserScreen {
   display: none;
 }
 
-/* 利用者一覧 */
+/* =========================
+   利用者一覧
+========================= */
+
 .user-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -69,7 +77,10 @@ h2 {
   background: #eee;
 }
 
-/* 職員ボタン */
+/* =========================
+   職員ボタン
+========================= */
+
 .staff-button {
   width: 100%;
   margin-top: 25px;
@@ -82,7 +93,10 @@ h2 {
   cursor: pointer;
 }
 
-/* パスワード */
+/* =========================
+   パスワード
+========================= */
+
 #passwordScreen,
 #staffLoginScreen {
   text-align: center;
@@ -121,7 +135,10 @@ h2 {
   border-radius: 8px;
 }
 
-/* 入力 */
+/* =========================
+   入力
+========================= */
+
 label {
   display: block;
   margin-top: 18px;
@@ -205,7 +222,10 @@ button.save {
   cursor: pointer;
 }
 
-/* 職員画面 */
+/* =========================
+   職員画面
+========================= */
+
 .staff-user-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -287,7 +307,106 @@ button.save {
   font-size: 16px;
 }
 
+/* =========================
+   職員 管理ボタン
+========================= */
+
+.management-area {
+  margin-top: 25px;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+.management-button {
+  width: 100%;
+  padding: 13px;
+  margin-top: 10px;
+  font-size: 16px;
+  background: #f1effb;
+  color: #4b3f9b;
+  border: 1px solid #c9c2ec;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.management-card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 15px;
+  margin-top: 10px;
+  background: #fafafa;
+}
+
+.management-name {
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.management-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.stop-button {
+  flex: 1;
+  padding: 10px;
+  background: white;
+  border: 1px solid #d88;
+  color: #a33;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.resume-button {
+  flex: 1;
+  padding: 10px;
+  background: white;
+  border: 1px solid #8a8;
+  color: #373;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* =========================
+   利用者追加
+========================= */
+
+.form-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px;
+  font-size: 17px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 5px;
+}
+
+.form-note {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.add-button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 15px;
+  font-size: 17px;
+  font-weight: bold;
+  color: white;
+  background: #4b3f9b;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* =========================
+   スマホ
+========================= */
+
 @media (max-width: 480px) {
+
   body {
     padding: 10px;
   }
@@ -299,6 +418,7 @@ button.save {
   .record-card {
     font-size: 15px;
   }
+
 }
 </style>
 </head>
@@ -320,6 +440,10 @@ button.save {
   </h2>
 
   <div class="user-list" id="userList"></div>
+
+  <div id="userLoading" class="loading">
+    利用者一覧を読み込んでいます……
+  </div>
 
   <button class="staff-button" id="staffButton">
     職員はこちら
@@ -495,6 +619,101 @@ button.save {
     id="staffUserList"
   ></div>
 
+  <div class="management-area">
+
+    <button
+      class="management-button"
+      id="addUserButton"
+    >
+      ＋ 利用者を追加
+    </button>
+
+    <button
+      class="management-button"
+      id="inactiveUserButton"
+    >
+      利用停止者を確認
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     利用者追加
+========================= -->
+
+<div id="addUserScreen">
+
+  <div class="staff-header">
+
+    <h1>利用者追加</h1>
+
+  </div>
+
+  <label>利用者名</label>
+
+  <input
+    type="text"
+    id="newUserName"
+    class="form-input"
+    placeholder="利用者名"
+  >
+
+  <label>ログインパスワード</label>
+
+  <input
+    type="text"
+    id="newUserPassword"
+    class="form-input"
+    inputmode="numeric"
+    maxlength="8"
+    placeholder="4桁の数字"
+  >
+
+  <div class="form-note">
+    利用者本人が入力するパスワードを設定してください。
+  </div>
+
+  <button
+    class="add-button"
+    id="saveNewUserButton"
+  >
+    利用者を登録
+  </button>
+
+  <button
+    class="staff-back"
+    id="addUserBackButton"
+  >
+    職員画面に戻る
+  </button>
+
+</div>
+
+
+<!-- =========================
+     利用停止者一覧
+========================= -->
+
+<div id="inactiveUserScreen">
+
+  <div class="staff-header">
+
+    <h1>利用停止者</h1>
+
+  </div>
+
+  <div id="inactiveUserList"></div>
+
+  <button
+    class="staff-back"
+    id="inactiveBackButton"
+  >
+    職員画面に戻る
+  </button>
+
 </div>
 
 
@@ -561,39 +780,17 @@ const supabaseClient =
   );
 
 
-/*
-  職員用Supabaseアカウントのメールアドレス。
+/* =========================
+   職員メールアドレス
+========================= */
 
-  職員は画面でメールアドレスを入力しません。
-
-  あとでSupabaseのAuthenticationに作る
-  職員アカウントのメールアドレスと
-  ここを同じにします。
-*/
-
-const STAFF_EMAIL = "legend.of.broly241@gmail.com";
+const STAFF_EMAIL =
+  "legend.of.broly241@gmail.com";
 
 
 /* =========================
-   利用者設定
+   選択中の利用者
 ========================= */
-
-const users = [
-  { name: "Aさん", password: "1234" },
-  { name: "Bさん", password: "1234" },
-  { name: "Cさん", password: "1234" },
-  { name: "Dさん", password: "1234" },
-  { name: "Eさん", password: "1234" },
-  { name: "Fさん", password: "1234" },
-  { name: "Gさん", password: "1234" },
-  { name: "Hさん", password: "1234" },
-  { name: "Iさん", password: "1234" },
-  { name: "Jさん", password: "1234" },
-  { name: "Kさん", password: "1234" },
-  { name: "Lさん", password: "1234" },
-  { name: "Mさん", password: "1234" },
-  { name: "Nさん", password: "1234" }
-];
 
 let selectedUser = null;
 
@@ -610,46 +807,117 @@ function hideAllScreens() {
   document.getElementById("staffLoginScreen").style.display = "none";
   document.getElementById("staffScreen").style.display = "none";
   document.getElementById("recordScreen").style.display = "none";
+  document.getElementById("addUserScreen").style.display = "none";
+  document.getElementById("inactiveUserScreen").style.display = "none";
 
 }
 
 
 /* =========================
-   利用者一覧
+   利用者一覧取得
 ========================= */
 
-const userList =
-  document.getElementById("userList");
+async function loadUsers() {
 
-users.forEach((user) => {
+  const userList =
+    document.getElementById("userList");
 
-  const button =
-    document.createElement("button");
+  const loading =
+    document.getElementById("userLoading");
 
-  button.className = "user-button";
-  button.textContent = user.name;
+  userList.innerHTML = "";
 
-  button.addEventListener("click", () => {
+  loading.style.display = "block";
 
-    selectedUser = user;
 
-    hideAllScreens();
+  const { data, error } =
+    await supabaseClient
+      .from("users")
+      .select("id,name,password,is_active")
+      .eq("is_active", true)
+      .order("name");
 
-    document.getElementById("passwordScreen").style.display =
-      "block";
 
-    document.getElementById("selectedUser").textContent =
+  loading.style.display = "none";
+
+
+  if (error) {
+
+    console.error(error);
+
+    userList.innerHTML = `
+      <div class="no-record">
+        利用者一覧を読み込めませんでした。<br><br>
+        ${error.message}
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  if (!data || data.length === 0) {
+
+    userList.innerHTML = `
+      <div class="no-record">
+        利用者が登録されていません。
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  data.forEach(user => {
+
+    const button =
+      document.createElement("button");
+
+    button.className =
+      "user-button";
+
+    button.textContent =
       user.name;
 
-    document.getElementById("password").value = "";
+    button.addEventListener("click", () => {
 
-    document.getElementById("password").focus();
+      selectedUser = user;
+
+      hideAllScreens();
+
+      document
+        .getElementById("passwordScreen")
+        .style.display = "block";
+
+      document
+        .getElementById("selectedUser")
+        .textContent =
+          user.name;
+
+      document
+        .getElementById("password")
+        .value = "";
+
+      document
+        .getElementById("password")
+        .focus();
+
+    });
+
+    userList.appendChild(button);
 
   });
 
-  userList.appendChild(button);
+}
 
-});
+
+/* =========================
+   初期表示
+========================= */
+
+loadUsers();
 
 
 /* =========================
@@ -660,33 +928,57 @@ document
   .getElementById("loginButton")
   .addEventListener("click", () => {
 
-    const password =
-      document.getElementById("password").value;
+    if (!selectedUser) {
 
-    if (password === selectedUser.password) {
+      alert("利用者を選択してください。");
+
+      return;
+
+    }
+
+
+    const password =
+      document
+        .getElementById("password")
+        .value;
+
+
+    if (
+      password ===
+      String(selectedUser.password)
+    ) {
 
       hideAllScreens();
 
-      document.getElementById("sheetScreen").style.display =
-        "block";
+      document
+        .getElementById("sheetScreen")
+        .style.display = "block";
 
-      document.getElementById("userName").textContent =
-        selectedUser.name;
+      document
+        .getElementById("userName")
+        .textContent =
+          selectedUser.name;
 
     } else {
 
       alert("パスワードが違います。");
 
-      document.getElementById("password").value = "";
+      document
+        .getElementById("password")
+        .value = "";
 
-      document.getElementById("password").focus();
+      document
+        .getElementById("password")
+        .focus();
 
     }
 
   });
 
 
-/* Enterキーでもログイン */
+/* =========================
+   Enterキー
+========================= */
 
 document
   .getElementById("password")
@@ -715,8 +1007,11 @@ document
 
     hideAllScreens();
 
-    document.getElementById("loginScreen").style.display =
-      "block";
+    document
+      .getElementById("loginScreen")
+      .style.display = "block";
+
+    loadUsers();
 
   });
 
@@ -727,15 +1022,22 @@ document
 
 const today = new Date();
 
-const year = today.getFullYear();
-const month = today.getMonth() + 1;
-const day = today.getDate();
+const year =
+  today.getFullYear();
+
+const month =
+  today.getMonth() + 1;
+
+const day =
+  today.getDate();
 
 const weekdays =
   ["日","月","火","水","木","金","土"];
 
-document.getElementById("date").textContent =
-  `${year}年${month}月${day}日（${weekdays[today.getDay()]}）`;
+document
+  .getElementById("date")
+  .textContent =
+    `${year}年${month}月${day}日（${weekdays[today.getDay()]}）`;
 
 
 /* =========================
@@ -748,6 +1050,7 @@ const healthItems = [
   ["runny", "鼻水"],
   ["throat", "のど痛"]
 ];
+
 
 healthItems.forEach(([id, name]) => {
 
@@ -835,9 +1138,11 @@ function setupTimeInput(id) {
   const input =
     document.getElementById(id);
 
+
   input.addEventListener("input", function() {
 
-    let value = this.value;
+    let value =
+      this.value;
 
     value =
       value.replace(/[^0-9]/g, "");
@@ -854,7 +1159,9 @@ function setupTimeInput(id) {
 
     }
 
-    this.value = value;
+    this.value =
+      value;
+
 
     if (value.length === 3) {
 
@@ -870,12 +1177,14 @@ function setupTimeInput(id) {
     let value =
       this.value.replace(/[^0-9]/g, "");
 
+
     if (value.length === 3) {
 
       value =
         "0" + value;
 
     }
+
 
     if (value.length === 4) {
 
@@ -890,6 +1199,7 @@ function setupTimeInput(id) {
 
 }
 
+
 setupTimeInput("arrival");
 setupTimeInput("leave");
 
@@ -903,13 +1213,19 @@ document
   .addEventListener("click", async function() {
 
     const arrival =
-      document.getElementById("arrival").value;
+      document
+        .getElementById("arrival")
+        .value;
 
     const leave =
-      document.getElementById("leave").value;
+      document
+        .getElementById("leave")
+        .value;
 
     const temp =
-      document.getElementById("temp").value;
+      document
+        .getElementById("temp")
+        .value;
 
 
     if (!arrival || !leave || !temp) {
@@ -970,6 +1286,7 @@ document
           `input[name="${name}"]:checked`
         );
 
+
       if (!selected) {
 
         alert(
@@ -979,6 +1296,7 @@ document
         return;
 
       }
+
 
       healthValues[name] =
         selected.value;
@@ -991,7 +1309,9 @@ document
 
 
     const other =
-      document.getElementById("other").value;
+      document
+        .getElementById("other")
+        .value;
 
 
     const { error } =
@@ -1057,7 +1377,7 @@ document
 
 
 /* =========================
-   職員ログイン画面へ
+   職員ログイン画面
 ========================= */
 
 document
@@ -1090,7 +1410,9 @@ document
   .addEventListener("click", async () => {
 
     const password =
-      document.getElementById("staffPassword").value;
+      document
+        .getElementById("staffPassword")
+        .value;
 
 
     if (!password) {
@@ -1107,9 +1429,11 @@ document
     const { error } =
       await supabaseClient.auth.signInWithPassword({
 
-        email: STAFF_EMAIL,
+        email:
+          STAFF_EMAIL,
 
-        password: password
+        password:
+          password
 
       });
 
@@ -1128,7 +1452,9 @@ document
     }
 
 
-    document.getElementById("staffPassword").value = "";
+    document
+      .getElementById("staffPassword")
+      .value = "";
 
     showStaffScreen();
 
@@ -1136,7 +1462,7 @@ document
 
 
 /* =========================
-   職員画面表示
+   職員画面
 ========================= */
 
 function showStaffScreen() {
@@ -1147,56 +1473,481 @@ function showStaffScreen() {
     .getElementById("staffScreen")
     .style.display = "block";
 
+  loadStaffUsers();
+
 }
-
-
-/* =========================
-   職員ログイン画面から戻る
-========================= */
-
-document
-  .getElementById("staffLoginBackButton")
-  .addEventListener("click", async () => {
-
-    await supabaseClient.auth.signOut();
-
-    hideAllScreens();
-
-    document
-      .getElementById("loginScreen")
-      .style.display = "block";
-
-  });
 
 
 /* =========================
    職員用 利用者一覧
 ========================= */
 
-const staffUserList =
-  document.getElementById("staffUserList");
+async function loadStaffUsers() {
+
+  const list =
+    document
+      .getElementById("staffUserList");
+
+  list.innerHTML =
+    `<div class="loading">
+      利用者一覧を読み込んでいます……
+    </div>`;
 
 
-users.forEach((user) => {
+  const { data, error } =
+    await supabaseClient
+      .from("users")
+      .select("id,name,is_active")
+      .eq("is_active", true)
+      .order("name");
 
-  const button =
-    document.createElement("button");
 
-  button.className =
-    "staff-user-button";
+  if (error) {
 
-  button.textContent =
-    user.name;
+    console.error(error);
 
-  button.addEventListener("click", () => {
+    list.innerHTML =
+      `<div class="no-record">
+        利用者一覧を読み込めませんでした。<br><br>
+        ${error.message}
+      </div>`;
 
-    loadRecords(user.name);
+    return;
+
+  }
+
+
+  if (!data || data.length === 0) {
+
+    list.innerHTML =
+      `<div class="no-record">
+        利用者が登録されていません。
+      </div>`;
+
+    return;
+
+  }
+
+
+  list.innerHTML = "";
+
+
+  data.forEach(user => {
+
+    const button =
+      document.createElement("button");
+
+    button.className =
+      "staff-user-button";
+
+    button.textContent =
+      user.name;
+
+    button.addEventListener("click", () => {
+
+      loadRecords(user.name);
+
+    });
+
+    list.appendChild(button);
 
   });
 
-  staffUserList.appendChild(button);
+}
 
-});
+
+/* =========================
+   利用者追加画面
+========================= */
+
+document
+  .getElementById("addUserButton")
+  .addEventListener("click", () => {
+
+    hideAllScreens();
+
+    document
+      .getElementById("addUserScreen")
+      .style.display = "block";
+
+    document
+      .getElementById("newUserName")
+      .value = "";
+
+    document
+      .getElementById("newUserPassword")
+      .value = "";
+
+    document
+      .getElementById("newUserName")
+      .focus();
+
+  });
+
+
+/* =========================
+   利用者登録
+========================= */
+
+document
+  .getElementById("saveNewUserButton")
+  .addEventListener("click", async () => {
+
+    const name =
+      document
+        .getElementById("newUserName")
+        .value
+        .trim();
+
+    const password =
+      document
+        .getElementById("newUserPassword")
+        .value
+        .trim();
+
+
+    if (!name) {
+
+      alert("利用者名を入力してください。");
+
+      return;
+
+    }
+
+
+    if (!/^\d{4}$/.test(password)) {
+
+      alert(
+        "パスワードは4桁の数字で入力してください。"
+      );
+
+      return;
+
+    }
+
+
+    const { data: existingUser, error: checkError } =
+      await supabaseClient
+        .from("users")
+        .select("id")
+        .eq("name", name)
+        .maybeSingle();
+
+
+    if (checkError) {
+
+      console.error(checkError);
+
+      alert(
+        "利用者を確認できませんでした。\n" +
+        checkError.message
+      );
+
+      return;
+
+    }
+
+
+    if (existingUser) {
+
+      alert(
+        "同じ名前の利用者がすでに登録されています。"
+      );
+
+      return;
+
+    }
+
+
+    const { error } =
+      await supabaseClient
+        .from("users")
+        .insert([
+          {
+            name:
+              name,
+
+            password:
+              password,
+
+            is_active:
+              true
+          }
+        ]);
+
+
+    if (error) {
+
+      console.error(error);
+
+      alert(
+        "利用者を登録できませんでした。\n" +
+        error.message
+      );
+
+      return;
+
+    }
+
+
+    alert(
+      `${name}さんを登録しました。`
+    );
+
+
+    showStaffScreen();
+
+  });
+
+
+/* =========================
+   利用者追加 → 戻る
+========================= */
+
+document
+  .getElementById("addUserBackButton")
+  .addEventListener("click", () => {
+
+    showStaffScreen();
+
+  });
+
+
+/* =========================
+   利用停止者一覧
+========================= */
+
+document
+  .getElementById("inactiveUserButton")
+  .addEventListener("click", () => {
+
+    loadInactiveUsers();
+
+  });
+
+
+async function loadInactiveUsers() {
+
+  hideAllScreens();
+
+  document
+    .getElementById("inactiveUserScreen")
+    .style.display = "block";
+
+
+  const list =
+    document
+      .getElementById("inactiveUserList");
+
+
+  list.innerHTML =
+    `<div class="loading">
+      利用停止者を読み込んでいます……
+    </div>`;
+
+
+  const { data, error } =
+    await supabaseClient
+      .from("users")
+      .select("id,name,is_active")
+      .eq("is_active", false)
+      .order("name");
+
+
+  if (error) {
+
+    console.error(error);
+
+    list.innerHTML =
+      `<div class="no-record">
+        利用停止者を読み込めませんでした。<br><br>
+        ${error.message}
+      </div>`;
+
+    return;
+
+  }
+
+
+  if (!data || data.length === 0) {
+
+    list.innerHTML =
+      `<div class="no-record">
+        利用停止者はいません。
+      </div>`;
+
+    return;
+
+  }
+
+
+  list.innerHTML = "";
+
+
+  data.forEach(user => {
+
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "management-card";
+
+
+    card.innerHTML = `
+
+      <div class="management-name">
+        ${user.name}
+      </div>
+
+      <div class="management-actions">
+
+        <button
+          class="resume-button"
+          data-id="${user.id}"
+        >
+          利用再開
+        </button>
+
+      </div>
+
+    `;
+
+
+    card
+      .querySelector(".resume-button")
+      .addEventListener("click", () => {
+
+        resumeUser(
+          user.id,
+          user.name
+        );
+
+      });
+
+
+    list.appendChild(card);
+
+  });
+
+}
+
+
+/* =========================
+   利用停止者 → 戻る
+========================= */
+
+document
+  .getElementById("inactiveBackButton")
+  .addEventListener("click", () => {
+
+    showStaffScreen();
+
+  });
+
+
+/* =========================
+   利用停止
+========================= */
+
+async function stopUser(id, name) {
+
+  const answer =
+    confirm(
+      `${name}さんを利用停止にしますか？\n\n` +
+      "利用停止しても、これまでの記録は削除されません。"
+    );
+
+
+  if (!answer) {
+
+    return;
+
+  }
+
+
+  const { error } =
+    await supabaseClient
+      .from("users")
+      .update({
+        is_active: false
+      })
+      .eq("id", id);
+
+
+  if (error) {
+
+    console.error(error);
+
+    alert(
+      "利用停止にできませんでした。\n" +
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  alert(
+    `${name}さんを利用停止にしました。`
+  );
+
+
+  loadStaffUsers();
+
+}
+
+
+/* =========================
+   利用再開
+========================= */
+
+async function resumeUser(id, name) {
+
+  const answer =
+    confirm(
+      `${name}さんの利用を再開しますか？`
+    );
+
+
+  if (!answer) {
+
+    return;
+
+  }
+
+
+  const { error } =
+    await supabaseClient
+      .from("users")
+      .update({
+        is_active: true
+      })
+      .eq("id", id);
+
+
+  if (error) {
+
+    console.error(error);
+
+    alert(
+      "利用を再開できませんでした。\n" +
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  alert(
+    `${name}さんの利用を再開しました。`
+  );
+
+
+  loadInactiveUsers();
+
+}
 
 
 /* =========================
@@ -1365,6 +2116,27 @@ document
 
 
 /* =========================
+   職員ログイン画面から戻る
+========================= */
+
+document
+  .getElementById("staffLoginBackButton")
+  .addEventListener("click", async () => {
+
+    await supabaseClient.auth.signOut();
+
+    hideAllScreens();
+
+    document
+      .getElementById("loginScreen")
+      .style.display = "block";
+
+    loadUsers();
+
+  });
+
+
+/* =========================
    職員ログアウト
 ========================= */
 
@@ -1377,6 +2149,8 @@ async function staffLogout() {
   document
     .getElementById("loginScreen")
     .style.display = "block";
+
+  loadUsers();
 
 }
 
