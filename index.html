@@ -1690,7 +1690,7 @@ document
         .insert([
           {
             user_name:
-              selectedUser.name,
+              selectedUser.name.trim(),
 
             record_date:
               recordDate,
@@ -2173,8 +2173,7 @@ async function loadInactiveUsers() {
 
 
   const list =
-    document
-      .getElementById("inactiveUserList");
+    document.getElementById("inactiveUserList");
 
 
   list.innerHTML =
@@ -2401,10 +2400,14 @@ async function loadRecords(userName) {
     .style.display = "block";
 
 
+  const cleanUserName =
+    String(userName || "").trim();
+
+
   document
     .getElementById("recordUserName")
     .textContent =
-      `${userName}の記録`;
+      `${cleanUserName}の記録`;
 
 
   const records =
@@ -2417,11 +2420,53 @@ async function loadRecords(userName) {
     </div>`;
 
 
+  /*
+    職員ログイン状態を確認
+  */
+
+  const {
+    data: sessionData,
+    error: sessionError
+  } =
+    await supabaseClient.auth.getSession();
+
+
+  if (sessionError) {
+
+    console.error(sessionError);
+
+    records.innerHTML =
+      `<div class="no-record">
+        ログイン状態を確認できませんでした。<br><br>
+        ${sessionError.message}
+      </div>`;
+
+    return;
+
+  }
+
+
+  if (!sessionData.session) {
+
+    records.innerHTML =
+      `<div class="no-record">
+        職員ログインが必要です。
+      </div>`;
+
+    return;
+
+  }
+
+
+  /*
+    利用者名の前後の空白を無視して検索
+  */
+
   const { data, error } =
     await supabaseClient
       .from("health_records")
       .select("*")
-      .eq("user_name", userName)
+      .ilike("user_name", cleanUserName)
       .order("record_date", {
         ascending: false
       });
@@ -2468,7 +2513,7 @@ async function loadRecords(userName) {
 
     const dateParts =
       record.record_date
-        ? record.record_date.split("-")
+        ? String(record.record_date).split("-")
         : [];
 
 
