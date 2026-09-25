@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -7,6 +8,10 @@
 <title>自己管理シート</title>
 
 <meta name="theme-color" content="#eeeafd">
+
+<link rel="manifest" href="manifest%5B1%5D.json">
+<link rel="icon" href="favicon%5B1%5D.png">
+<link rel="apple-touch-icon" href="apple-touch-icon%5B1%5D.png">
 
 <style>
 
@@ -743,13 +748,12 @@ button.save:hover {
 }
 
 </style>
-</head>
 
+</head>
 
 <body>
 
 <div class="container">
-
 
 <!-- =========================
      トップページ
@@ -775,7 +779,6 @@ button.save:hover {
 
 </div>
 
-
 <!-- =========================
      利用者パスワード
 ========================= -->
@@ -788,14 +791,15 @@ button.save:hover {
 
   <p>パスワードを入力してください</p>
 
-  <input
-    type="password"
-    id="password"
-    class="password-input"
-    inputmode="numeric"
-    maxlength="8"
-    placeholder="パスワード"
-  >
+<input
+type="password"
+id="password"
+class="password-input"
+inputmode="numeric"
+maxlength="8"
+placeholder="パスワード"
+
+>
 
   <button class="login-button" id="loginButton">
     ログイン
@@ -808,7 +812,6 @@ button.save:hover {
   </button>
 
 </div>
-
 
 <!-- =========================
      今日の自己管理
@@ -825,57 +828,64 @@ button.save:hover {
     id="userName"
   ></div>
 
-  <label>来所時間</label>
+<label>来所時間</label>
 
-  <input
-    type="text"
-    id="arrival"
-    class="time-input"
-    inputmode="numeric"
-    maxlength="5"
-    placeholder="例：15:30"
-    autocomplete="off"
-  >
+<input
+type="text"
+id="arrival"
+class="time-input"
+inputmode="numeric"
+maxlength="5"
+placeholder="例：15:30"
+autocomplete="off"
 
-  <label>帰所時間</label>
+>
 
-  <input
-    type="text"
-    id="leave"
-    class="time-input"
-    inputmode="numeric"
-    maxlength="5"
-    placeholder="例：18:00"
-    autocomplete="off"
-  >
+<label>帰所時間</label>
 
-  <label>体温</label>
+<input
+type="text"
+id="leave"
+class="time-input"
+inputmode="numeric"
+maxlength="5"
+placeholder="例：18:00"
+autocomplete="off"
 
-  <input
-    type="text"
-    id="temp"
-    inputmode="decimal"
-    placeholder="例：36.5"
-    autocomplete="off"
-  >
+>
+
+<label>体温</label>
+
+<input
+type="text"
+id="temp"
+inputmode="decimal"
+placeholder="例：36.5"
+autocomplete="off"
+
+>
 
   <div class="note">
     体温は36.5のように「.」を入れて入力してください。
   </div>
 
-  <label>咳</label>
+<label>咳</label>
+
   <div class="choices" id="cough"></div>
 
-  <label>頭痛</label>
+<label>頭痛</label>
+
   <div class="choices" id="headache"></div>
 
-  <label>鼻水</label>
+<label>鼻水</label>
+
   <div class="choices" id="runny"></div>
 
-  <label>のど痛</label>
+<label>のど痛</label>
+
   <div class="choices" id="throat"></div>
 
-  <label>その他</label>
+<label>その他</label>
 
   <textarea
     id="other"
@@ -888,7 +898,6 @@ button.save:hover {
 
 </div>
 
-
 <!-- =========================
      職員ログイン
 ========================= -->
@@ -899,13 +908,14 @@ button.save:hover {
 
   <p>職員用パスワードを入力してください</p>
 
-  <input
-    type="password"
-    id="staffPassword"
-    class="staff-input"
-    placeholder="パスワード"
-    autocomplete="current-password"
-  >
+<input
+type="password"
+id="staffPassword"
+class="staff-input"
+placeholder="パスワード"
+autocomplete="current-password"
+
+>
 
   <button class="login-button" id="staffLoginButton">
     職員ログイン
@@ -917,7 +927,6 @@ button.save:hover {
 
 </div>
 
-
 <!-- =========================
      職員 利用者選択
 ========================= -->
@@ -926,11 +935,13 @@ button.save:hover {
 
   <div class="staff-header">
 
-    <h1>記録確認</h1>
+```
+<h1>記録確認</h1>
 
-    <button class="logout-button" id="staffLogoutButton">
-      ログアウト
-    </button>
+<button class="logout-button" id="staffLogoutButton">
+  ログアウト
+</button>
+```
 
   </div>
 
@@ -945,24 +956,25 @@ button.save:hover {
 
   <div class="management-area">
 
-    <button
-      class="management-button"
-      id="addUserButton"
-    >
-      ＋ 利用者を追加
-    </button>
+```
+<button
+  class="management-button"
+  id="addUserButton"
+>
+  ＋ 利用者を追加
+</button>
 
-    <button
-      class="management-button"
-      id="inactiveUserButton"
-    >
-      利用停止者を確認
-    </button>
+<button
+  class="management-button"
+  id="inactiveUserButton"
+>
+  利用停止者を確認
+</button>
+```
 
   </div>
 
 </div>
-
 
 <!-- =========================
      利用者追加
@@ -972,63 +984,77 @@ button.save:hover {
 
   <div class="staff-header">
 
-    <h1>利用者追加</h1>
+```
+<h1>利用者追加</h1>
+```
 
   </div>
 
-  <label>利用者名</label>
+<label>利用者名</label>
 
-  <input
-    type="text"
-    id="newUserName"
-    class="form-input"
-    placeholder="例：山田 太郎"
-  >
+<input
+type="text"
+id="newUserName"
+class="form-input"
+placeholder="例：山田 太郎"
 
-  <label>ふりがな</label>
+>
 
-  <input
-    type="text"
-    id="newUserFurigana"
-    class="form-input"
-    placeholder="例：やまだ たろう"
-  >
+<label>ふりがな</label>
+
+<input
+type="text"
+id="newUserFurigana"
+class="form-input"
+placeholder="例：やまだ たろう"
+
+>
 
   <div class="form-note">
     苗字と名前の間にスペースを入れてください。
   </div>
 
-  <label>ログインパスワード</label>
+<label>ログインパスワード</label>
 
-  <input
-    type="text"
-    id="newUserPassword"
-    class="form-input"
-    inputmode="numeric"
-    maxlength="8"
-    placeholder="4桁の数字"
-  >
+<input
+type="text"
+id="newUserPassword"
+class="form-input"
+inputmode="numeric"
+maxlength="8"
+placeholder="4桁の数字"
+
+>
 
   <div class="form-note">
     利用者本人が入力するパスワードを設定してください。
   </div>
 
-  <button
-    class="add-button"
-    id="saveNewUserButton"
-  >
-    利用者を登録
+<button
+class="add-button"
+id="saveNewUserButton"
+
+>
+
+```
+利用者を登録
+```
+
   </button>
 
-  <button
-    class="staff-back"
-    id="addUserBackButton"
-  >
-    職員画面に戻る
+<button
+class="staff-back"
+id="addUserBackButton"
+
+>
+
+```
+職員画面に戻る
+```
+
   </button>
 
 </div>
-
 
 <!-- =========================
      利用停止者一覧
@@ -1038,21 +1064,27 @@ button.save:hover {
 
   <div class="staff-header">
 
-    <h1>利用停止者</h1>
+```
+<h1>利用停止者</h1>
+```
 
   </div>
 
   <div id="inactiveUserList"></div>
 
-  <button
-    class="staff-back"
-    id="inactiveBackButton"
-  >
-    職員画面に戻る
+<button
+class="staff-back"
+id="inactiveBackButton"
+
+>
+
+```
+職員画面に戻る
+```
+
   </button>
 
 </div>
-
 
 <!-- =========================
      職員 記録一覧
@@ -1062,11 +1094,13 @@ button.save:hover {
 
   <div class="staff-header">
 
-    <h1>記録一覧</h1>
+```
+<h1>記録一覧</h1>
 
-    <button class="logout-button" id="recordLogoutButton">
-      ログアウト
-    </button>
+<button class="logout-button" id="recordLogoutButton">
+  ログアウト
+</button>
+```
 
   </div>
 
@@ -1090,7 +1124,6 @@ button.save:hover {
 </div>
 
 </div>
-
 
 <!-- =========================
      Supabase
