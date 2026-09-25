@@ -3,46 +3,139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>自己管理シート</title>
 
+<!-- =========================
+     アイコン
+========================= -->
+
+<link
+  rel="icon"
+  href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%2389cfff'/%3E%3Cstop offset='100%25' stop-color='%23c7a8ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='110' fill='url(%23g)'/%3E%3Crect x='130' y='90' width='250' height='330' rx='35' fill='white' opacity='.96'/%3E%3Cpath d='M185 175h140M185 225h105' stroke='%235b4bb7' stroke-width='22' stroke-linecap='round'/%3E%3Cpath d='M185 285l35 35 70-75' fill='none' stroke='%235b4bb7' stroke-width='24' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M325 315c0-28-38-37-50-9-12-28-50-19-50 9 0 27 50 58 50 58s50-31 50-58z' fill='%23a99bea'/%3E%3C/svg%3E"
+>
+
+
 <style>
+
+/* =====================================================
+   全体
+===================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
 body {
-  font-family: sans-serif;
-  background: #f5f6fa;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Noto Sans JP",
+    "Yu Gothic",
+    "Hiragino Kaku Gothic ProN",
+    sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(190, 220, 255, 0.65),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(220, 195, 255, 0.60),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #eef8ff 0%,
+      #f5f1ff 50%,
+      #fdf7ff 100%
+    );
+
+  background-attachment: fixed;
+
   margin: 0;
   padding: 20px;
+
   color: #333;
+
+  min-height: 100vh;
 }
+
+
+/* =====================================================
+   メインカード
+===================================================== */
 
 .container {
+
   max-width: 500px;
-  margin: auto;
-  background: white;
+
+  margin: 25px auto;
+
+  background:
+    rgba(255,255,255,0.94);
+
   padding: 24px;
-  border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 12px 40px rgba(91,75,183,0.12),
+    0 3px 12px rgba(0,0,0,0.05);
+
+  border:
+    1px solid rgba(255,255,255,0.9);
+
 }
 
+
+/* =====================================================
+   見出し
+===================================================== */
+
 h1 {
+
   text-align: center;
-  color: #4b3f9b;
+
+  color: #51449f;
+
   margin-bottom: 8px;
+
+  letter-spacing: 1px;
+
 }
 
 h2 {
-  color: #4b3f9b;
+
+  color: #51449f;
+
 }
 
 .date {
+
   text-align: center;
+
   font-size: 18px;
+
   margin-bottom: 24px;
+
   font-weight: bold;
+
+  color: #555;
+
 }
 
-/* =========================
+
+/* =====================================================
    画面
-========================= */
+===================================================== */
 
 #passwordScreen,
 #sheetScreen,
@@ -51,405 +144,808 @@ h2 {
 #recordScreen,
 #addUserScreen,
 #inactiveUserScreen {
+
   display: none;
+
 }
 
-/* =========================
+
+/* =====================================================
    利用者一覧
-========================= */
+===================================================== */
 
 .user-list {
+
   display: grid;
+
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+
+  gap: 12px;
+
 }
 
 .user-button {
-  padding: 15px 10px;
+
+  padding: 16px 10px;
+
   font-size: 17px;
-  background: #fff;
-  border: 2px solid #ddd;
-  border-radius: 10px;
+
+  font-weight: bold;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #f7f5ff
+    );
+
+  color: #444;
+
+  border:
+    1px solid #ddd8f4;
+
+  border-radius: 14px;
+
   cursor: pointer;
+
+  box-shadow:
+    0 3px 10px rgba(91,75,183,0.06);
+
+  transition:
+    transform .15s,
+    box-shadow .15s;
+
 }
 
 .user-button:active {
-  background: #eee;
+
+  transform: scale(0.98);
+
+  box-shadow:
+    0 1px 5px rgba(91,75,183,0.08);
+
 }
 
-/* =========================
+
+/* =====================================================
    職員ボタン
-========================= */
+===================================================== */
 
 .staff-button {
+
   width: 100%;
+
   margin-top: 25px;
-  padding: 13px;
+
+  padding: 14px;
+
   font-size: 16px;
-  background: #f1effb;
-  color: #4b3f9b;
-  border: 1px solid #c9c2ec;
-  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f5f2ff,
+      #eef8ff
+    );
+
+  color: #51449f;
+
+  border:
+    1px solid #d5cef3;
+
+  border-radius: 12px;
+
   cursor: pointer;
+
 }
 
-/* =========================
+
+/* =====================================================
    パスワード
-========================= */
+===================================================== */
 
 #passwordScreen,
 #staffLoginScreen {
+
   text-align: center;
+
 }
 
 .password-input,
 .staff-input {
+
   width: 100%;
-  box-sizing: border-box;
-  padding: 13px;
+
+  padding: 14px;
+
   font-size: 18px;
+
   text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+
+  border:
+    1px solid #d7d4e5;
+
+  border-radius: 12px;
+
   margin: 10px 0;
+
+  background: #fcfcff;
+
+}
+
+.password-input:focus,
+.staff-input:focus,
+input:focus,
+textarea:focus {
+
+  outline: none;
+
+  border-color: #9b8ee2;
+
+  box-shadow:
+    0 0 0 3px rgba(155,142,226,0.15);
+
 }
 
 .login-button {
+
   width: 100%;
+
   padding: 14px;
+
   font-size: 18px;
+
   font-weight: bold;
+
   color: white;
-  background: #4b3f9b;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6254bd,
+      #8979d8
+    );
+
   border: none;
-  border-radius: 10px;
+
+  border-radius: 12px;
+
   cursor: pointer;
+
+  box-shadow:
+    0 5px 14px rgba(91,75,183,0.20);
+
 }
 
 .back-button {
+
   margin-top: 12px;
+
   padding: 10px 20px;
+
   font-size: 15px;
+
   background: white;
+
   border: 1px solid #bbb;
-  border-radius: 8px;
+
+  border-radius: 9px;
+
 }
 
-/* =========================
+
+/* =====================================================
    入力
-========================= */
+===================================================== */
 
 label {
+
   display: block;
+
   margin-top: 18px;
+
   margin-bottom: 7px;
+
   font-weight: bold;
+
+  color: #444;
+
 }
 
 input[type="text"],
 input[type="number"] {
+
   width: 100%;
-  box-sizing: border-box;
+
   padding: 12px;
+
   font-size: 18px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+
+  border:
+    1px solid #d7d4e5;
+
+  border-radius: 10px;
+
+  background: #fcfcff;
+
 }
 
 .time-input {
+
   text-align: center;
+
   letter-spacing: 2px;
+
 }
 
 .note {
+
   font-size: 13px;
+
   color: #666;
+
   margin-top: 5px;
+
 }
 
 .choices {
+
   display: flex;
+
   gap: 10px;
+
 }
 
 .choice {
+
   flex: 1;
+
   position: relative;
+
 }
 
 .choice input {
+
   display: none;
+
 }
 
 .choice span {
+
   display: block;
+
   text-align: center;
+
   padding: 12px;
-  border: 2px solid #ddd;
-  border-radius: 8px;
+
+  border:
+    2px solid #ddd;
+
+  border-radius: 10px;
+
   background: #fff;
+
   cursor: pointer;
+
   font-size: 17px;
+
+  transition: .15s;
+
 }
 
 .choice input:checked + span {
-  background: #5b4bb7;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6658bd,
+      #897bd7
+    );
+
   color: white;
-  border-color: #5b4bb7;
+
+  border-color: #6658bd;
+
+  box-shadow:
+    0 4px 10px rgba(91,75,183,0.18);
+
 }
 
 textarea {
+
   width: 100%;
-  box-sizing: border-box;
+
   min-height: 90px;
+
   padding: 12px;
+
   font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+
+  border:
+    1px solid #d7d4e5;
+
+  border-radius: 10px;
+
   resize: vertical;
+
+  background: #fcfcff;
+
 }
 
 button.save {
+
   width: 100%;
+
   margin-top: 25px;
-  padding: 14px;
+
+  padding: 15px;
+
   font-size: 18px;
+
   font-weight: bold;
+
   color: white;
-  background: #4b3f9b;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6254bd,
+      #8979d8
+    );
+
   border: none;
-  border-radius: 10px;
+
+  border-radius: 12px;
+
   cursor: pointer;
+
+  box-shadow:
+    0 5px 14px rgba(91,75,183,0.20);
+
 }
 
-/* =========================
+
+/* =====================================================
    職員画面
-========================= */
+===================================================== */
 
 .staff-user-list {
+
   display: flex;
+
   flex-direction: column;
-  gap: 10px;
+
+  gap: 12px;
+
   margin-top: 20px;
+
 }
 
 .staff-user-card {
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 12px;
-  background: #fafafa;
+
+  border:
+    1px solid #e0ddef;
+
+  border-radius: 15px;
+
+  padding: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #faf9ff
+    );
+
+  box-shadow:
+    0 3px 10px rgba(91,75,183,0.05);
+
 }
 
 .staff-user-name {
+
   font-size: 17px;
+
   font-weight: bold;
+
   margin-bottom: 10px;
+
+  color: #444;
+
 }
 
 .staff-user-actions {
+
   display: flex;
+
   gap: 8px;
+
 }
 
 .record-view-button {
+
   flex: 1;
+
   padding: 10px;
+
   font-size: 15px;
+
   background: white;
-  border: 1px solid #bbb;
-  color: #4b3f9b;
-  border-radius: 8px;
+
+  border:
+    1px solid #cfc8ed;
+
+  color: #51449f;
+
+  border-radius: 9px;
+
   cursor: pointer;
+
 }
 
 .record-view-button:active {
+
   background: #f1effb;
+
 }
 
 .staff-header {
+
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
+
   gap: 10px;
+
   margin-bottom: 20px;
+
 }
 
 .staff-header h1 {
+
   margin: 0;
+
 }
 
 .logout-button {
+
   padding: 8px 12px;
+
   background: white;
-  border: 1px solid #bbb;
+
+  border:
+    1px solid #bbb;
+
   border-radius: 8px;
+
   cursor: pointer;
+
 }
 
 .record-card {
-  border: 1px solid #ddd;
-  border-radius: 12px;
+
+  border:
+    1px solid #e0ddef;
+
+  border-radius: 15px;
+
   padding: 15px;
+
   margin-bottom: 12px;
-  background: #fafafa;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #faf9ff
+    );
+
 }
 
 .record-date {
+
   font-size: 17px;
+
   font-weight: bold;
-  color: #4b3f9b;
+
+  color: #51449f;
+
   margin-bottom: 10px;
+
 }
 
 .record-row {
+
   margin: 6px 0;
+
   line-height: 1.5;
+
 }
 
 .record-label {
+
   font-weight: bold;
+
 }
 
 .no-record,
 .loading {
+
   text-align: center;
+
   color: #666;
+
   padding: 30px 10px;
+
 }
 
 .staff-back {
+
   width: 100%;
+
   margin-top: 10px;
+
   padding: 12px;
+
   background: white;
-  border: 1px solid #bbb;
-  border-radius: 8px;
+
+  border:
+    1px solid #bbb;
+
+  border-radius: 9px;
+
   font-size: 16px;
+
 }
 
-/* =========================
-   職員 管理ボタン
-========================= */
+
+/* =====================================================
+   管理ボタン
+===================================================== */
 
 .management-area {
+
   margin-top: 25px;
-  border-top: 1px solid #ddd;
+
+  border-top:
+    1px solid #ddd;
+
   padding-top: 20px;
+
 }
 
 .management-button {
+
   width: 100%;
+
   padding: 13px;
+
   margin-top: 10px;
+
   font-size: 16px;
-  background: #f1effb;
-  color: #4b3f9b;
-  border: 1px solid #c9c2ec;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f5f2ff,
+      #eef8ff
+    );
+
+  color: #51449f;
+
+  border:
+    1px solid #c9c2ec;
+
   border-radius: 10px;
+
   cursor: pointer;
+
 }
 
 .management-card {
-  border: 1px solid #ddd;
+
+  border:
+    1px solid #ddd;
+
   border-radius: 12px;
+
   padding: 15px;
+
   margin-top: 10px;
+
   background: #fafafa;
+
 }
 
 .management-name {
+
   font-size: 17px;
+
   font-weight: bold;
+
   margin-bottom: 12px;
+
 }
 
 .management-actions {
+
   display: flex;
+
   gap: 8px;
+
 }
 
 .stop-button {
+
   flex: 1;
+
   padding: 10px;
+
   background: white;
-  border: 1px solid #d88;
+
+  border:
+    1px solid #d88;
+
   color: #a33;
+
   border-radius: 8px;
+
   cursor: pointer;
+
 }
 
 .resume-button {
+
   flex: 1;
+
   padding: 10px;
+
   background: white;
-  border: 1px solid #8a8;
+
+  border:
+    1px solid #8a8;
+
   color: #373;
+
   border-radius: 8px;
+
   cursor: pointer;
+
 }
 
-/* =========================
+
+/* =====================================================
    利用者追加
-========================= */
+===================================================== */
 
 .form-input {
+
   width: 100%;
-  box-sizing: border-box;
+
   padding: 13px;
+
   font-size: 17px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+
+  border:
+    1px solid #d7d4e5;
+
+  border-radius: 10px;
+
   margin-bottom: 5px;
+
+  background: #fcfcff;
+
 }
 
 .form-note {
+
   font-size: 13px;
+
   color: #666;
+
   margin-bottom: 15px;
+
 }
 
 .add-button {
+
   width: 100%;
+
   padding: 14px;
+
   margin-top: 15px;
+
   font-size: 17px;
+
   font-weight: bold;
+
   color: white;
-  background: #4b3f9b;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6254bd,
+      #8979d8
+    );
+
   border: none;
+
   border-radius: 10px;
+
   cursor: pointer;
+
 }
 
-/* =========================
+
+/* =====================================================
    スマホ
-========================= */
+===================================================== */
 
 @media (max-width: 480px) {
 
   body {
+
     padding: 10px;
+
   }
 
   .container {
+
     padding: 18px;
+
+    margin: 10px auto;
+
+    border-radius: 20px;
+
   }
 
   .record-card {
+
     font-size: 15px;
+
   }
 
   .staff-user-actions {
+
     flex-direction: column;
+
   }
 
 }
+
+
+/* =====================================================
+   小さな装飾
+===================================================== */
+
+.container::before {
+
+  content: "♡";
+
+  display: block;
+
+  text-align: center;
+
+  font-size: 26px;
+
+  color: #9b8ee2;
+
+  margin-bottom: -3px;
+
+  opacity: .75;
+
+}
+
 </style>
 </head>
+
 
 <body>
 
 <div class="container">
+
 
 <!-- =========================
      トップページ
@@ -463,13 +959,22 @@ button.save {
     自分の名前を選んでください
   </h2>
 
-  <div class="user-list" id="userList"></div>
+  <div
+    class="user-list"
+    id="userList"
+  ></div>
 
-  <div id="userLoading" class="loading">
+  <div
+    id="userLoading"
+    class="loading"
+  >
     利用者一覧を読み込んでいます……
   </div>
 
-  <button class="staff-button" id="staffButton">
+  <button
+    class="staff-button"
+    id="staffButton"
+  >
     職員はこちら
   </button>
 
@@ -497,13 +1002,19 @@ button.save {
     placeholder="パスワード"
   >
 
-  <button class="login-button" id="loginButton">
+  <button
+    class="login-button"
+    id="loginButton"
+  >
     ログイン
   </button>
 
   <br>
 
-  <button class="back-button" id="backButton">
+  <button
+    class="back-button"
+    id="backButton"
+  >
     名前を選び直す
   </button>
 
@@ -518,12 +1029,16 @@ button.save {
 
   <h1>自己管理シート</h1>
 
-  <div class="date" id="date"></div>
+  <div
+    class="date"
+    id="date"
+  ></div>
 
   <div
-    style="text-align:center; font-weight:bold;"
+    style="text-align:center;font-weight:bold;"
     id="userName"
   ></div>
+
 
   <label>来所時間</label>
 
@@ -537,6 +1052,7 @@ button.save {
     autocomplete="off"
   >
 
+
   <label>帰所時間</label>
 
   <input
@@ -548,6 +1064,7 @@ button.save {
     placeholder="例：18:00"
     autocomplete="off"
   >
+
 
   <label>体温</label>
 
@@ -563,17 +1080,34 @@ button.save {
     体温は36.5のように「.」を入れて入力してください。
   </div>
 
+
   <label>咳</label>
-  <div class="choices" id="cough"></div>
+  <div
+    class="choices"
+    id="cough"
+  ></div>
+
 
   <label>頭痛</label>
-  <div class="choices" id="headache"></div>
+  <div
+    class="choices"
+    id="headache"
+  ></div>
+
 
   <label>鼻水</label>
-  <div class="choices" id="runny"></div>
+  <div
+    class="choices"
+    id="runny"
+  ></div>
+
 
   <label>のど痛</label>
-  <div class="choices" id="throat"></div>
+  <div
+    class="choices"
+    id="throat"
+  ></div>
+
 
   <label>その他</label>
 
@@ -582,7 +1116,11 @@ button.save {
     placeholder="気になることがあれば入力してください"
   ></textarea>
 
-  <button class="save" id="save">
+
+  <button
+    class="save"
+    id="save"
+  >
     保存
   </button>
 
@@ -607,11 +1145,17 @@ button.save {
     autocomplete="current-password"
   >
 
-  <button class="login-button" id="staffLoginButton">
+  <button
+    class="login-button"
+    id="staffLoginButton"
+  >
     職員ログイン
   </button>
 
-  <button class="back-button" id="staffLoginBackButton">
+  <button
+    class="back-button"
+    id="staffLoginBackButton"
+  >
     戻る
   </button>
 
@@ -628,7 +1172,10 @@ button.save {
 
     <h1>記録確認</h1>
 
-    <button class="logout-button" id="staffLogoutButton">
+    <button
+      class="logout-button"
+      id="staffLogoutButton"
+    >
       ログアウト
     </button>
 
@@ -642,6 +1189,7 @@ button.save {
     class="staff-user-list"
     id="staffUserList"
   ></div>
+
 
   <div class="management-area">
 
@@ -764,7 +1312,10 @@ button.save {
 
     <h1>記録一覧</h1>
 
-    <button class="logout-button" id="recordLogoutButton">
+    <button
+      class="logout-button"
+      id="recordLogoutButton"
+    >
       ログアウト
     </button>
 
@@ -775,7 +1326,7 @@ button.save {
       text-align:center;
       font-size:18px;
       font-weight:bold;
-      color:#4b3f9b;
+      color:#51449f;
       margin-bottom:20px;
     "
     id="recordUserName"
@@ -783,7 +1334,10 @@ button.save {
 
   <div id="records"></div>
 
-  <button class="staff-back" id="recordBackButton">
+  <button
+    class="staff-back"
+    id="recordBackButton"
+  >
     利用者選択に戻る
   </button>
 
@@ -798,11 +1352,13 @@ button.save {
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
 <script>
 
-/* =========================
+
+/* =====================================================
    Supabase設定
-========================= */
+===================================================== */
 
 const SUPABASE_URL =
   "https://yiohaakomljvrulaajoy.supabase.co";
@@ -817,46 +1373,53 @@ const supabaseClient =
   );
 
 
-/* =========================
+/* =====================================================
    職員メールアドレス
-========================= */
+===================================================== */
 
 const STAFF_EMAIL =
   "legend.of.broly241@gmail.com";
 
 
-/* =========================
+/* =====================================================
    選択中の利用者
-========================= */
+===================================================== */
 
 let selectedUser = null;
 
 
-/* =========================
+/* =====================================================
    画面切り替え
-========================= */
+===================================================== */
 
 function hideAllScreens() {
 
   document.getElementById("loginScreen").style.display = "none";
+
   document.getElementById("passwordScreen").style.display = "none";
+
   document.getElementById("sheetScreen").style.display = "none";
+
   document.getElementById("staffLoginScreen").style.display = "none";
+
   document.getElementById("staffScreen").style.display = "none";
+
   document.getElementById("recordScreen").style.display = "none";
+
   document.getElementById("addUserScreen").style.display = "none";
+
   document.getElementById("inactiveUserScreen").style.display = "none";
 
 }
 
 
-/* =========================
-   ふりがな順に並べ替え
-========================= */
+/* =====================================================
+   ふりがな順
+===================================================== */
 
 function sortUsersByFurigana(users) {
 
-  return users.sort((a, b) => {
+  return users.sort((a,b) => {
 
     const aFurigana =
       String(a.furigana || "").trim();
@@ -874,11 +1437,9 @@ function sortUsersByFurigana(users) {
 }
 
 
-/* =========================
-   利用者一覧取得
-   ※読み込みが一時的に0件になった場合は
-     最大3回まで再取得する
-========================= */
+/* =====================================================
+   利用者一覧
+===================================================== */
 
 async function loadUsers() {
 
@@ -893,139 +1454,101 @@ async function loadUsers() {
   loading.style.display = "block";
 
 
-  for (let attempt = 1; attempt <= 3; attempt++) {
-
-    const { data, error } =
-      await supabaseClient
-        .from("users")
-        .select("id,name,furigana,password,is_active")
-        .eq("is_active", true);
-
-
-    if (error) {
-
-      console.error(
-        `利用者一覧取得エラー（${attempt}回目）`,
-        error
-      );
-
-
-      if (attempt === 3) {
-
-        loading.style.display = "none";
-
-        userList.innerHTML = `
-          <div class="no-record">
-            利用者一覧を読み込めませんでした。<br><br>
-            ${error.message}
-          </div>
-        `;
-
-        return;
-
-      }
-
-
-      await new Promise(resolve =>
-        setTimeout(resolve, 700)
-      );
-
-      continue;
-
-    }
-
-
-    if (data && data.length > 0) {
-
-      loading.style.display = "none";
-
-      sortUsersByFurigana(data);
-
-
-      data.forEach(user => {
-
-        const button =
-          document.createElement("button");
-
-        button.className =
-          "user-button";
-
-        button.textContent =
-          user.name;
-
-
-        button.addEventListener("click", () => {
-
-          selectedUser = user;
-
-          hideAllScreens();
-
-
-          document
-            .getElementById("passwordScreen")
-            .style.display = "block";
-
-
-          document
-            .getElementById("selectedUser")
-            .textContent =
-              user.name;
-
-
-          document
-            .getElementById("password")
-            .value = "";
-
-
-          document
-            .getElementById("password")
-            .focus();
-
-        });
-
-
-        userList.appendChild(button);
-
-      });
-
-
-      return;
-
-    }
-
-
-    // 0件だった場合
-    if (attempt < 3) {
-
-      console.log(
-        `利用者が0件だったため再取得します（${attempt}回目）`
-      );
-
-
-      await new Promise(resolve =>
-        setTimeout(resolve, 700)
-      );
-
-    }
-
-  }
+  const { data, error } =
+    await supabaseClient
+      .from("users")
+      .select(
+        "id,name,furigana,password,is_active"
+      )
+      .eq("is_active", true);
 
 
   loading.style.display = "none";
 
 
-  userList.innerHTML = `
-    <div class="no-record">
-      利用者が登録されていません。
-    </div>
-  `;
+  if (error) {
+
+    console.error(error);
+
+    userList.innerHTML = `
+      <div class="no-record">
+        利用者一覧を読み込めませんでした。<br><br>
+        ${error.message}
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  if (!data || data.length === 0) {
+
+    userList.innerHTML = `
+      <div class="no-record">
+        利用者が登録されていません。
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  sortUsersByFurigana(data);
+
+
+  data.forEach(user => {
+
+    const button =
+      document.createElement("button");
+
+    button.className =
+      "user-button";
+
+    button.textContent =
+      user.name;
+
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        selectedUser = user;
+
+        hideAllScreens();
+
+        document
+          .getElementById("passwordScreen")
+          .style.display = "block";
+
+        document
+          .getElementById("selectedUser")
+          .textContent =
+            user.name;
+
+        document
+          .getElementById("password")
+          .value = "";
+
+        document
+          .getElementById("password")
+          .focus();
+
+      }
+    );
+
+
+    userList.appendChild(button);
+
+  });
 
 }
 
 
-/* =========================
+/* =====================================================
    初期表示
-========================= */
+===================================================== */
 
 hideAllScreens();
 
@@ -1036,107 +1559,121 @@ document
 loadUsers();
 
 
-/* =========================
-   利用者パスワード
-========================= */
+/* =====================================================
+   利用者ログイン
+===================================================== */
 
 document
   .getElementById("loginButton")
-  .addEventListener("click", () => {
+  .addEventListener(
+    "click",
+    () => {
 
-    if (!selectedUser) {
+      if (!selectedUser) {
 
-      alert("利用者を選択してください。");
+        alert(
+          "利用者を選択してください。"
+        );
 
-      return;
+        return;
+
+      }
+
+
+      const password =
+        document
+          .getElementById("password")
+          .value;
+
+
+      if (
+        password ===
+        String(selectedUser.password)
+      ) {
+
+        hideAllScreens();
+
+        document
+          .getElementById("sheetScreen")
+          .style.display = "block";
+
+        document
+          .getElementById("userName")
+          .textContent =
+            selectedUser.name;
+
+      } else {
+
+        alert(
+          "パスワードが違います。"
+        );
+
+        document
+          .getElementById("password")
+          .value = "";
+
+        document
+          .getElementById("password")
+          .focus();
+
+      }
 
     }
+  );
 
 
-    const password =
-      document
-        .getElementById("password")
-        .value;
+/* =====================================================
+   Enter
+===================================================== */
+
+document
+  .getElementById("password")
+  .addEventListener(
+    "keydown",
+    (e) => {
+
+      if (e.key === "Enter") {
+
+        document
+          .getElementById("loginButton")
+          .click();
+
+      }
+
+    }
+  );
 
 
-    if (
-      password ===
-      String(selectedUser.password)
-    ) {
+/* =====================================================
+   名前を選び直す
+===================================================== */
+
+document
+  .getElementById("backButton")
+  .addEventListener(
+    "click",
+    () => {
+
+      selectedUser = null;
 
       hideAllScreens();
 
       document
-        .getElementById("sheetScreen")
+        .getElementById("loginScreen")
         .style.display = "block";
 
-      document
-        .getElementById("userName")
-        .textContent =
-          selectedUser.name;
-
-    } else {
-
-      alert("パスワードが違います。");
-
-      document
-        .getElementById("password")
-        .value = "";
-
-      document
-        .getElementById("password")
-        .focus();
+      loadUsers();
 
     }
-
-  });
-
-
-/* =========================
-   Enterキー
-========================= */
-
-document
-  .getElementById("password")
-  .addEventListener("keydown", (e) => {
-
-    if (e.key === "Enter") {
-
-      document
-        .getElementById("loginButton")
-        .click();
-
-    }
-
-  });
+  );
 
 
-/* =========================
-   名前を選び直す
-========================= */
+/* =====================================================
+   日付
+===================================================== */
 
-document
-  .getElementById("backButton")
-  .addEventListener("click", () => {
-
-    selectedUser = null;
-
-    hideAllScreens();
-
-    document
-      .getElementById("loginScreen")
-      .style.display = "block";
-
-    loadUsers();
-
-  });
-
-
-/* =========================
-   今日の日付
-========================= */
-
-const today = new Date();
+const today =
+  new Date();
 
 const year =
   today.getFullYear();
@@ -1150,104 +1687,127 @@ const day =
 const weekdays =
   ["日","月","火","水","木","金","土"];
 
+
 document
   .getElementById("date")
   .textContent =
     `${year}年${month}月${day}日（${weekdays[today.getDay()]}）`;
 
 
-/* =========================
+/* =====================================================
    体調項目
-========================= */
+===================================================== */
 
 const healthItems = [
+
   ["cough", "咳"],
+
   ["headache", "頭痛"],
+
   ["runny", "鼻水"],
+
   ["throat", "のど痛"]
+
 ];
 
 
-healthItems.forEach(([id, name]) => {
+healthItems.forEach(
+  ([id, name]) => {
 
-  const box =
-    document.getElementById(id);
+    const box =
+      document.getElementById(id);
 
-  box.innerHTML = `
+    box.innerHTML = `
 
-    <label class="choice">
+      <label class="choice">
 
-      <input
-        type="radio"
-        name="${id}"
-        value="有"
-      >
+        <input
+          type="radio"
+          name="${id}"
+          value="有"
+        >
 
-      <span>有</span>
+        <span>有</span>
 
-    </label>
-
-    <label class="choice">
-
-      <input
-        type="radio"
-        name="${id}"
-        value="無"
-      >
-
-      <span>無</span>
-
-    </label>
-
-  `;
-
-});
+      </label>
 
 
-/* =========================
-   有・無の選択・解除
-========================= */
+      <label class="choice">
+
+        <input
+          type="radio"
+          name="${id}"
+          value="無"
+        >
+
+        <span>無</span>
+
+      </label>
+
+    `;
+
+  }
+);
+
+
+/* =====================================================
+   有・無 選択解除
+===================================================== */
 
 document
   .querySelectorAll(".choices input")
-  .forEach(input => {
+  .forEach(
+    input => {
 
-    input.addEventListener("click", function(e) {
+      input.addEventListener(
+        "click",
+        function(e) {
 
-      if (this.dataset.checked === "true") {
+          if (
+            this.dataset.checked ===
+            "true"
+          ) {
 
-        this.checked = false;
+            this.checked = false;
 
-        this.dataset.checked = "false";
+            this.dataset.checked =
+              "false";
 
-        e.preventDefault();
+            e.preventDefault();
 
-      } else {
+          } else {
 
-        const name = this.name;
+            const name =
+              this.name;
 
-        document
-          .querySelectorAll(
-            `input[name="${name}"]`
-          )
-          .forEach(other => {
+            document
+              .querySelectorAll(
+                `input[name="${name}"]`
+              )
+              .forEach(
+                other => {
 
-            other.dataset.checked = "false";
+                  other.dataset.checked =
+                    "false";
 
-          });
+                }
+              );
 
-        this.dataset.checked = "true";
+            this.dataset.checked =
+              "true";
 
-      }
+          }
 
-    });
+        }
+      );
 
-  });
+    }
+  );
 
 
-/* =========================
+/* =====================================================
    時間入力
-========================= */
+===================================================== */
 
 function setupTimeInput(id) {
 
@@ -1255,158 +1815,123 @@ function setupTimeInput(id) {
     document.getElementById(id);
 
 
-  input.addEventListener("input", function() {
+  input.addEventListener(
+    "input",
+    function() {
 
-    let value =
-      this.value;
-
-    value =
-      value.replace(/[^0-9]/g, "");
-
-    value =
-      value.slice(0, 4);
-
-    if (value.length > 2) {
+      let value =
+        this.value;
 
       value =
-        value.slice(0, 2) +
-        ":" +
-        value.slice(2);
-
-    }
-
-    this.value =
-      value;
-
-
-    if (value.length === 3) {
-
-      this.setSelectionRange(3, 3);
-
-    }
-
-  });
-
-
-  input.addEventListener("blur", function() {
-
-    let value =
-      this.value.replace(/[^0-9]/g, "");
-
-
-    if (value.length === 3) {
+        value.replace(
+          /[^0-9]/g,
+          ""
+        );
 
       value =
-        "0" + value;
-
-    }
+        value.slice(0,4);
 
 
-    if (value.length === 4) {
+      if (value.length > 2) {
+
+        value =
+          value.slice(0,2)
+          + ":"
+          + value.slice(2);
+
+      }
+
 
       this.value =
-        value.slice(0, 2) +
-        ":" +
-        value.slice(2);
+        value;
+
+
+      if (value.length === 3) {
+
+        this.setSelectionRange(
+          3,
+          3
+        );
+
+      }
 
     }
+  );
 
-  });
+
+  input.addEventListener(
+    "blur",
+    function() {
+
+      let value =
+        this.value.replace(
+          /[^0-9]/g,
+          ""
+        );
+
+
+      if (value.length === 3) {
+
+        value =
+          "0" + value;
+
+      }
+
+
+      if (value.length === 4) {
+
+        this.value =
+          value.slice(0,2)
+          + ":"
+          + value.slice(2);
+
+      }
+
+    }
+  );
 
 }
 
 
 setupTimeInput("arrival");
+
 setupTimeInput("leave");
 
 
-/* =========================
+/* =====================================================
    保存
-========================= */
+===================================================== */
 
 document
   .getElementById("save")
-  .addEventListener("click", async function() {
+  .addEventListener(
+    "click",
+    async function() {
 
-    const arrival =
-      document
-        .getElementById("arrival")
-        .value;
+      const arrival =
+        document
+          .getElementById("arrival")
+          .value;
 
-    const leave =
-      document
-        .getElementById("leave")
-        .value;
+      const leave =
+        document
+          .getElementById("leave")
+          .value;
 
-    const temp =
-      document
-        .getElementById("temp")
-        .value;
-
-
-    if (!arrival || !leave || !temp) {
-
-      alert(
-        "来所時間・帰所時間・体温を入力してください。"
-      );
-
-      return;
-
-    }
+      const temp =
+        document
+          .getElementById("temp")
+          .value;
 
 
-    const timePattern =
-      /^(?:[01]\d|2[0-3]):[0-5]\d$/;
-
-
-    if (
-      !timePattern.test(arrival) ||
-      !timePattern.test(leave)
-    ) {
-
-      alert(
-        "時間は「15:30」のように入力してください。"
-      );
-
-      return;
-
-    }
-
-
-    if (!/^\d{2}\.\d$/.test(temp)) {
-
-      alert(
-        "体温は「36.5」のように「.」を入れて入力してください。"
-      );
-
-      return;
-
-    }
-
-
-    const healthNames = [
-      "cough",
-      "headache",
-      "runny",
-      "throat"
-    ];
-
-
-    const healthValues = {};
-
-
-    for (const name of healthNames) {
-
-      const selected =
-        document.querySelector(
-          `input[name="${name}"]:checked`
-        );
-
-
-      if (!selected) {
+      if (
+        !arrival ||
+        !leave ||
+        !temp
+      ) {
 
         alert(
-          "体調変化の「有・無」をすべて選択してください。"
+          "来所時間・帰所時間・体温を入力してください。"
         );
 
         return;
@@ -1414,172 +1939,250 @@ document
       }
 
 
-      healthValues[name] =
-        selected.value;
-
-    }
+      const timePattern =
+        /^(?:[01]\d|2[0-3]):[0-5]\d$/;
 
 
-    const recordDate =
-      `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+      if (
+        !timePattern.test(arrival) ||
+        !timePattern.test(leave)
+      ) {
+
+        alert(
+          "時間は「15:30」のように入力してください。"
+        );
+
+        return;
+
+      }
 
 
-    const other =
-      document
-        .getElementById("other")
-        .value;
+      if (
+        !/^\d{2}\.\d$/.test(temp)
+      ) {
+
+        alert(
+          "体温は「36.5」のように「.」を入れて入力してください。"
+        );
+
+        return;
+
+      }
 
 
-    const { error } =
-      await supabaseClient
-        .from("health_records")
-        .insert([
-          {
-            user_name:
-              selectedUser.name,
+      const healthNames = [
 
-            record_date:
-              recordDate,
+        "cough",
 
-            arrival:
-              arrival,
+        "headache",
 
-            leave:
-              leave,
+        "runny",
 
-            temperature:
-              Number(temp),
+        "throat"
 
-            cough:
-              healthValues.cough,
-
-            headache:
-              healthValues.headache,
-
-            runny:
-              healthValues.runny,
-
-            throat:
-              healthValues.throat,
-
-            other:
-              other
-          }
-        ]);
+      ];
 
 
-    if (error) {
+      const healthValues = {};
 
-      console.error(error);
+
+      for (
+        const name of healthNames
+      ) {
+
+        const selected =
+          document.querySelector(
+            `input[name="${name}"]:checked`
+          );
+
+
+        if (!selected) {
+
+          alert(
+            "体調変化の「有・無」をすべて選択してください。"
+          );
+
+          return;
+
+        }
+
+
+        healthValues[name] =
+          selected.value;
+
+      }
+
+
+      const recordDate =
+        `${year}-${String(month).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+
+
+      const other =
+        document
+          .getElementById("other")
+          .value;
+
+
+      const { error } =
+        await supabaseClient
+          .from("health_records")
+          .insert([
+
+            {
+
+              user_name:
+                selectedUser.name,
+
+              record_date:
+                recordDate,
+
+              arrival:
+                arrival,
+
+              leave:
+                leave,
+
+              temperature:
+                Number(temp),
+
+              cough:
+                healthValues.cough,
+
+              headache:
+                healthValues.headache,
+
+              runny:
+                healthValues.runny,
+
+              throat:
+                healthValues.throat,
+
+              other:
+                other
+
+            }
+
+          ]);
+
+
+      if (error) {
+
+        console.error(error);
+
+        alert(
+          "保存できませんでした。\n"
+          + error.message
+        );
+
+        return;
+
+      }
+
 
       alert(
-        "保存できませんでした。\n" +
-        error.message
+        "記録を保存しました。"
       );
 
-      return;
-
     }
-
-
-    alert("記録を保存しました。");
-
-  });
+  );
 
 
 /* =====================================================
-   職員用
-===================================================== */
-
-
-/* =========================
    職員ログイン画面
-========================= */
+===================================================== */
 
 document
   .getElementById("staffButton")
-  .addEventListener("click", () => {
+  .addEventListener(
+    "click",
+    () => {
 
-    hideAllScreens();
+      hideAllScreens();
 
-    document
-      .getElementById("staffLoginScreen")
-      .style.display = "block";
+      document
+        .getElementById("staffLoginScreen")
+        .style.display = "block";
 
-    document
-      .getElementById("staffPassword")
-      .value = "";
+      document
+        .getElementById("staffPassword")
+        .value = "";
 
-    document
-      .getElementById("staffPassword")
-      .focus();
+      document
+        .getElementById("staffPassword")
+        .focus();
 
-  });
+    }
+  );
 
 
-/* =========================
+/* =====================================================
    職員ログイン
-========================= */
+===================================================== */
 
 document
   .getElementById("staffLoginButton")
-  .addEventListener("click", async () => {
+  .addEventListener(
+    "click",
+    async () => {
 
-    const password =
+      const password =
+        document
+          .getElementById("staffPassword")
+          .value;
+
+
+      if (!password) {
+
+        alert(
+          "職員用パスワードを入力してください。"
+        );
+
+        return;
+
+      }
+
+
+      const { error } =
+        await supabaseClient.auth
+          .signInWithPassword({
+
+            email:
+              STAFF_EMAIL,
+
+            password:
+              password
+
+          });
+
+
+      if (error) {
+
+        console.error(error);
+
+        alert(
+          "ログインできませんでした。\n"
+          + error.message
+        );
+
+        return;
+
+      }
+
+
       document
         .getElementById("staffPassword")
-        .value;
+        .value = "";
 
 
-    if (!password) {
-
-      alert(
-        "職員用パスワードを入力してください。"
-      );
-
-      return;
+      showStaffScreen();
 
     }
+  );
 
 
-    const { error } =
-      await supabaseClient.auth.signInWithPassword({
-
-        email:
-          STAFF_EMAIL,
-
-        password:
-          password
-
-      });
-
-
-    if (error) {
-
-      console.error(error);
-
-      alert(
-        "ログインできませんでした。\n" +
-        error.message
-      );
-
-      return;
-
-    }
-
-
-    document
-      .getElementById("staffPassword")
-      .value = "";
-
-    showStaffScreen();
-
-  });
-
-
-/* =========================
+/* =====================================================
    職員画面
-========================= */
+===================================================== */
 
 function showStaffScreen() {
 
@@ -1594,15 +2197,16 @@ function showStaffScreen() {
 }
 
 
-/* =========================
+/* =====================================================
    職員用 利用者一覧
-========================= */
+===================================================== */
 
 async function loadStaffUsers() {
 
   const list =
     document
       .getElementById("staffUserList");
+
 
   list.innerHTML =
     `<div class="loading">
@@ -1613,7 +2217,9 @@ async function loadStaffUsers() {
   const { data, error } =
     await supabaseClient
       .from("users")
-      .select("id,name,furigana,is_active")
+      .select(
+        "id,name,furigana,is_active"
+      )
       .eq("is_active", true);
 
 
@@ -1632,7 +2238,10 @@ async function loadStaffUsers() {
   }
 
 
-  if (!data || data.length === 0) {
+  if (
+    !data ||
+    data.length === 0
+  ) {
 
     list.innerHTML =
       `<div class="no-record">
@@ -1645,7 +2254,6 @@ async function loadStaffUsers() {
 
 
   sortUsersByFurigana(data);
-
 
   list.innerHTML = "";
 
@@ -1665,6 +2273,7 @@ async function loadStaffUsers() {
         ${user.name}
       </div>
 
+
       <div class="staff-user-actions">
 
         <button
@@ -1672,6 +2281,7 @@ async function loadStaffUsers() {
         >
           記録を見る
         </button>
+
 
         <button
           class="stop-button"
@@ -1684,27 +2294,35 @@ async function loadStaffUsers() {
     `;
 
 
-    const recordButton =
-      card.querySelector(".record-view-button");
+    card
+      .querySelector(
+        ".record-view-button"
+      )
+      .addEventListener(
+        "click",
+        () => {
 
-    recordButton.addEventListener("click", () => {
+          loadRecords(user.name);
 
-      loadRecords(user.name);
-
-    });
-
-
-    const stopButton =
-      card.querySelector(".stop-button");
-
-    stopButton.addEventListener("click", () => {
-
-      stopUser(
-        user.id,
-        user.name
+        }
       );
 
-    });
+
+    card
+      .querySelector(
+        ".stop-button"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          stopUser(
+            user.id,
+            user.name
+          );
+
+        }
+      );
 
 
     list.appendChild(card);
@@ -1714,196 +2332,223 @@ async function loadStaffUsers() {
 }
 
 
-/* =========================
+/* =====================================================
    利用者追加画面
-========================= */
+===================================================== */
 
 document
   .getElementById("addUserButton")
-  .addEventListener("click", () => {
+  .addEventListener(
+    "click",
+    () => {
 
-    hideAllScreens();
+      hideAllScreens();
 
-    document
-      .getElementById("addUserScreen")
-      .style.display = "block";
+      document
+        .getElementById("addUserScreen")
+        .style.display = "block";
 
-    document
-      .getElementById("newUserName")
-      .value = "";
+      document
+        .getElementById("newUserName")
+        .value = "";
 
-    document
-      .getElementById("newUserFurigana")
-      .value = "";
+      document
+        .getElementById("newUserFurigana")
+        .value = "";
 
-    document
-      .getElementById("newUserPassword")
-      .value = "";
+      document
+        .getElementById("newUserPassword")
+        .value = "";
 
-    document
-      .getElementById("newUserName")
-      .focus();
+      document
+        .getElementById("newUserName")
+        .focus();
 
-  });
+    }
+  );
 
 
-/* =========================
+/* =====================================================
    利用者登録
-========================= */
+===================================================== */
 
 document
   .getElementById("saveNewUserButton")
-  .addEventListener("click", async () => {
+  .addEventListener(
+    "click",
+    async () => {
 
-    const name =
-      document
-        .getElementById("newUserName")
-        .value
-        .trim();
-
-    const furigana =
-      document
-        .getElementById("newUserFurigana")
-        .value
-        .trim();
-
-    const password =
-      document
-        .getElementById("newUserPassword")
-        .value
-        .trim();
+      const name =
+        document
+          .getElementById("newUserName")
+          .value
+          .trim();
 
 
-    if (!name) {
-
-      alert("利用者名を入力してください。");
-
-      return;
-
-    }
+      const furigana =
+        document
+          .getElementById("newUserFurigana")
+          .value
+          .trim();
 
 
-    if (!furigana) {
-
-      alert("ふりがなを入力してください。");
-
-      return;
-
-    }
+      const password =
+        document
+          .getElementById("newUserPassword")
+          .value
+          .trim();
 
 
-    if (!/^\d{4}$/.test(password)) {
+      if (!name) {
+
+        alert(
+          "利用者名を入力してください。"
+        );
+
+        return;
+
+      }
+
+
+      if (!furigana) {
+
+        alert(
+          "ふりがなを入力してください。"
+        );
+
+        return;
+
+      }
+
+
+      if (
+        !/^\d{4}$/.test(password)
+      ) {
+
+        alert(
+          "パスワードは4桁の数字で入力してください。"
+        );
+
+        return;
+
+      }
+
+
+      const {
+        data: existingUser,
+        error: checkError
+      } =
+        await supabaseClient
+          .from("users")
+          .select("id")
+          .eq("name", name)
+          .maybeSingle();
+
+
+      if (checkError) {
+
+        console.error(checkError);
+
+        alert(
+          "利用者を確認できませんでした。\n"
+          + checkError.message
+        );
+
+        return;
+
+      }
+
+
+      if (existingUser) {
+
+        alert(
+          "同じ名前の利用者がすでに登録されています。"
+        );
+
+        return;
+
+      }
+
+
+      const { error } =
+        await supabaseClient
+          .from("users")
+          .insert([
+
+            {
+
+              name:
+                name,
+
+              furigana:
+                furigana,
+
+              password:
+                password,
+
+              is_active:
+                true
+
+            }
+
+          ]);
+
+
+      if (error) {
+
+        console.error(error);
+
+        alert(
+          "利用者を登録できませんでした。\n"
+          + error.message
+        );
+
+        return;
+
+      }
+
 
       alert(
-        "パスワードは4桁の数字で入力してください。"
+        `${name}さんを登録しました。`
       );
 
-      return;
+
+      showStaffScreen();
 
     }
+  );
 
 
-    const { data: existingUser, error: checkError } =
-      await supabaseClient
-        .from("users")
-        .select("id")
-        .eq("name", name)
-        .maybeSingle();
-
-
-    if (checkError) {
-
-      console.error(checkError);
-
-      alert(
-        "利用者を確認できませんでした。\n" +
-        checkError.message
-      );
-
-      return;
-
-    }
-
-
-    if (existingUser) {
-
-      alert(
-        "同じ名前の利用者がすでに登録されています。"
-      );
-
-      return;
-
-    }
-
-
-    const { error } =
-      await supabaseClient
-        .from("users")
-        .insert([
-          {
-            name:
-              name,
-
-            furigana:
-              furigana,
-
-            password:
-              password,
-
-            is_active:
-              true
-          }
-        ]);
-
-
-    if (error) {
-
-      console.error(error);
-
-      alert(
-        "利用者を登録できませんでした。\n" +
-        error.message
-      );
-
-      return;
-
-    }
-
-
-    alert(
-      `${name}さんを登録しました。`
-    );
-
-
-    showStaffScreen();
-
-  });
-
-
-/* =========================
+/* =====================================================
    利用者追加 → 戻る
-========================= */
+===================================================== */
 
 document
   .getElementById("addUserBackButton")
-  .addEventListener("click", () => {
+  .addEventListener(
+    "click",
+    () => {
 
-    showStaffScreen();
+      showStaffScreen();
 
-  });
+    }
+  );
 
 
-/* =========================
+/* =====================================================
    利用停止者一覧
-========================= */
+===================================================== */
 
 document
   .getElementById("inactiveUserButton")
-  .addEventListener("click", () => {
+  .addEventListener(
+    "click",
+    () => {
 
-    loadInactiveUsers();
+      loadInactiveUsers();
 
-  });
+    }
+  );
 
 
 async function loadInactiveUsers() {
@@ -1929,7 +2574,9 @@ async function loadInactiveUsers() {
   const { data, error } =
     await supabaseClient
       .from("users")
-      .select("id,name,furigana,is_active")
+      .select(
+        "id,name,furigana,is_active"
+      )
       .eq("is_active", false);
 
 
@@ -1948,7 +2595,10 @@ async function loadInactiveUsers() {
   }
 
 
-  if (!data || data.length === 0) {
+  if (
+    !data ||
+    data.length === 0
+  ) {
 
     list.innerHTML =
       `<div class="no-record">
@@ -1961,7 +2611,6 @@ async function loadInactiveUsers() {
 
 
   sortUsersByFurigana(data);
-
 
   list.innerHTML = "";
 
@@ -1981,6 +2630,7 @@ async function loadInactiveUsers() {
         ${user.name}
       </div>
 
+
       <div class="management-actions">
 
         <button
@@ -1995,15 +2645,20 @@ async function loadInactiveUsers() {
 
 
     card
-      .querySelector(".resume-button")
-      .addEventListener("click", () => {
+      .querySelector(
+        ".resume-button"
+      )
+      .addEventListener(
+        "click",
+        () => {
 
-        resumeUser(
-          user.id,
-          user.name
-        );
+          resumeUser(
+            user.id,
+            user.name
+          );
 
-      });
+        }
+      );
 
 
     list.appendChild(card);
@@ -2013,28 +2668,32 @@ async function loadInactiveUsers() {
 }
 
 
-/* =========================
+/* =====================================================
    利用停止者 → 戻る
-========================= */
+===================================================== */
 
 document
   .getElementById("inactiveBackButton")
-  .addEventListener("click", () => {
+  .addEventListener(
+    "click",
+    () => {
 
-    showStaffScreen();
+      showStaffScreen();
 
-  });
+    }
+  );
 
 
-/* =========================
+/* =====================================================
    利用停止
-========================= */
+===================================================== */
 
 async function stopUser(id, name) {
 
   const answer =
     confirm(
-      `${name}さんを利用停止にしますか？\n\n` +
+      `${name}さんを利用停止にしますか？\n\n`
+      +
       "利用停止しても、これまでの記録は削除されません。"
     );
 
@@ -2060,8 +2719,8 @@ async function stopUser(id, name) {
     console.error(error);
 
     alert(
-      "利用停止にできませんでした。\n" +
-      error.message
+      "利用停止にできませんでした。\n"
+      + error.message
     );
 
     return;
@@ -2079,9 +2738,9 @@ async function stopUser(id, name) {
 }
 
 
-/* =========================
+/* =====================================================
    利用再開
-========================= */
+===================================================== */
 
 async function resumeUser(id, name) {
 
@@ -2112,8 +2771,8 @@ async function resumeUser(id, name) {
     console.error(error);
 
     alert(
-      "利用を再開できませんでした。\n" +
-      error.message
+      "利用を再開できませんでした。\n"
+      + error.message
     );
 
     return;
@@ -2131,9 +2790,9 @@ async function resumeUser(id, name) {
 }
 
 
-/* =========================
+/* =====================================================
    記録取得
-========================= */
+===================================================== */
 
 async function loadRecords(userName) {
 
@@ -2151,7 +2810,8 @@ async function loadRecords(userName) {
 
 
   const records =
-    document.getElementById("records");
+    document
+      .getElementById("records");
 
 
   records.innerHTML =
@@ -2165,9 +2825,12 @@ async function loadRecords(userName) {
       .from("health_records")
       .select("*")
       .eq("user_name", userName)
-      .order("record_date", {
-        ascending: false
-      });
+      .order(
+        "record_date",
+        {
+          ascending: false
+        }
+      );
 
 
   if (error) {
@@ -2185,7 +2848,10 @@ async function loadRecords(userName) {
   }
 
 
-  if (!data || data.length === 0) {
+  if (
+    !data ||
+    data.length === 0
+  ) {
 
     records.innerHTML =
       `<div class="no-record">
@@ -2219,10 +2885,16 @@ async function loadRecords(userName) {
       record.record_date || "";
 
 
-    if (dateParts.length === 3) {
+    if (
+      dateParts.length === 3
+    ) {
 
       displayDate =
-        `${Number(dateParts[0])}年${Number(dateParts[1])}月${Number(dateParts[2])}日`;
+        `${Number(dateParts[0])}年`
+        +
+        `${Number(dateParts[1])}月`
+        +
+        `${Number(dateParts[2])}日`;
 
     }
 
@@ -2233,43 +2905,67 @@ async function loadRecords(userName) {
         ${displayDate}
       </div>
 
+
       <div class="record-row">
-        <span class="record-label">来所：</span>
+        <span class="record-label">
+          来所：
+        </span>
         ${record.arrival || ""}
       </div>
 
+
       <div class="record-row">
-        <span class="record-label">帰所：</span>
+        <span class="record-label">
+          帰所：
+        </span>
         ${record.leave || ""}
       </div>
 
+
       <div class="record-row">
-        <span class="record-label">体温：</span>
+        <span class="record-label">
+          体温：
+        </span>
         ${record.temperature ?? ""}
       </div>
 
+
       <div class="record-row">
-        <span class="record-label">咳：</span>
+        <span class="record-label">
+          咳：
+        </span>
         ${record.cough || ""}
       </div>
 
+
       <div class="record-row">
-        <span class="record-label">頭痛：</span>
+        <span class="record-label">
+          頭痛：
+        </span>
         ${record.headache || ""}
       </div>
 
+
       <div class="record-row">
-        <span class="record-label">鼻水：</span>
+        <span class="record-label">
+          鼻水：
+        </span>
         ${record.runny || ""}
       </div>
 
+
       <div class="record-row">
-        <span class="record-label">のど痛：</span>
+        <span class="record-label">
+          のど痛：
+        </span>
         ${record.throat || ""}
       </div>
 
+
       <div class="record-row">
-        <span class="record-label">その他：</span>
+        <span class="record-label">
+          その他：
+        </span>
         ${record.other || "なし"}
       </div>
 
@@ -2283,47 +2979,59 @@ async function loadRecords(userName) {
 }
 
 
-/* =========================
+/* =====================================================
    記録画面 → 利用者選択
-========================= */
+===================================================== */
 
 document
   .getElementById("recordBackButton")
-  .addEventListener("click", () => {
+  .addEventListener(
+    "click",
+    () => {
 
-    showStaffScreen();
+      showStaffScreen();
 
-  });
+    }
+  );
 
 
-/* =========================
+/* =====================================================
    職員ログイン画面から戻る
-========================= */
+===================================================== */
 
 document
   .getElementById("staffLoginBackButton")
-  .addEventListener("click", async () => {
+  .addEventListener(
+    "click",
+    async () => {
 
-    await supabaseClient.auth.signOut();
-
-    hideAllScreens();
-
-    document
-      .getElementById("loginScreen")
-      .style.display = "block";
-
-    loadUsers();
-
-  });
+      await supabaseClient
+        .auth
+        .signOut();
 
 
-/* =========================
+      hideAllScreens();
+
+      document
+        .getElementById("loginScreen")
+        .style.display = "block";
+
+      loadUsers();
+
+    }
+  );
+
+
+/* =====================================================
    職員ログアウト
-========================= */
+===================================================== */
 
 async function staffLogout() {
 
-  await supabaseClient.auth.signOut();
+  await supabaseClient
+    .auth
+    .signOut();
+
 
   hideAllScreens();
 
@@ -2352,23 +3060,26 @@ document
   );
 
 
-/* =========================
-   職員ログイン Enterキー
-========================= */
+/* =====================================================
+   職員ログイン Enter
+===================================================== */
 
 document
   .getElementById("staffPassword")
-  .addEventListener("keydown", (e) => {
+  .addEventListener(
+    "keydown",
+    (e) => {
 
-    if (e.key === "Enter") {
+      if (e.key === "Enter") {
 
-      document
-        .getElementById("staffLoginButton")
-        .click();
+        document
+          .getElementById("staffLoginButton")
+          .click();
+
+      }
 
     }
-
-  });
+  );
 
 </script>
 
