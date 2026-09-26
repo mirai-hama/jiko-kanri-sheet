@@ -1,20 +1,20 @@
 {
-"name": "自己管理シート",
-"short_name": "自己管理シート",
-"start_url": "./",
-"display": "standalone",
-"background_color": "#f5f3ff",
-"theme_color": "#6b5bbd",
-"icons": [
-{
-"src": "icon-192%5B2%5D.png",
-"sizes": "192x192",
-"type": "image/png"
-},
-{
-"src": "icon-512%5B2%5D.png",
-"sizes": "512x512",
-"type": "image/png"
-}
-]
+  "name": "自己管理シート",
+  "short_name": "自己管理シート",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f3ff",
+  "theme_color": "#6b5bbd",
+  "icons": [
+    {
+      "src": "icon-192%282%29.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512%282%29.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
