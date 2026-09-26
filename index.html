@@ -15,7 +15,6 @@
 
 <style>
 
-
 * {
   box-sizing: border-box;
 }
@@ -27,7 +26,6 @@ body {
     "Segoe UI",
     "Noto Sans JP",
     sans-serif;
-
   background:
     linear-gradient(
       135deg,
@@ -35,55 +33,31 @@ body {
       #eeeafd 50%,
       #f8f6ff 100%
     );
-
   background-attachment: fixed;
-
   margin: 0;
   padding: 24px 16px;
-
   color: #333;
-
   min-height: 100vh;
 }
-
-
-/* =========================
-   メインカード
-========================= */
 
 .container {
   width: 100%;
   max-width: 520px;
-
   margin: 0 auto;
-
   background: rgba(255,255,255,0.94);
-
   padding: 28px;
-
   border-radius: 22px;
-
   box-shadow:
     0 8px 30px rgba(76,63,155,0.10);
-
   border: 1px solid rgba(255,255,255,0.9);
 }
 
-
-/* =========================
-   見出し
-========================= */
-
 h1 {
   text-align: center;
-
   color: #51449b;
-
   margin-top: 0;
   margin-bottom: 10px;
-
   font-size: 27px;
-
   letter-spacing: 0.03em;
 }
 
@@ -91,27 +65,13 @@ h2 {
   color: #51449b;
 }
 
-
-/* =========================
-   日付
-========================= */
-
 .date {
   text-align: center;
-
   font-size: 18px;
-
   margin-bottom: 24px;
-
   font-weight: bold;
-
   color: #555;
 }
-
-
-/* =========================
-   画面
-========================= */
 
 #passwordScreen,
 #sheetScreen,
@@ -123,85 +83,50 @@ h2 {
   display: none;
 }
 
-
-/* =========================
-   利用者一覧
-========================= */
-
 .user-list {
   display: grid;
-
   grid-template-columns: 1fr 1fr;
-
   gap: 12px;
 }
 
 .user-button {
   padding: 16px 10px;
-
   font-size: 17px;
-
   background: white;
-
   border: 1px solid #ddd8f0;
-
   border-radius: 12px;
-
   cursor: pointer;
-
   color: #444;
-
   box-shadow:
     0 2px 8px rgba(70,60,130,0.05);
-
   transition: 0.15s;
 }
 
 .user-button:hover {
   background: #f7f5ff;
-
   border-color: #bdb4e8;
 }
 
 .user-button:active {
   transform: scale(0.98);
-
   background: #eeeafd;
 }
 
-
-/* =========================
-   職員ボタン
-========================= */
-
 .staff-button {
   width: 100%;
-
   margin-top: 28px;
-
   padding: 14px;
-
   font-size: 16px;
-
   background: #f3f0ff;
-
   color: #51449b;
-
   border: 1px solid #d3ccef;
-
   border-radius: 12px;
-
   cursor: pointer;
 }
 
 .staff-button:hover {
   background: #ebe7fb;
 }
-
-
-/* =========================
-   パスワード
-========================= */
 
 #passwordScreen,
 #staffLoginScreen {
@@ -211,19 +136,12 @@ h2 {
 .password-input,
 .staff-input {
   width: 100%;
-
   padding: 14px;
-
   font-size: 18px;
-
   text-align: center;
-
   border: 1px solid #ccc;
-
   border-radius: 10px;
-
   margin: 10px 0 14px;
-
   outline: none;
 }
 
@@ -233,30 +151,20 @@ input[type="text"]:focus,
 input[type="number"]:focus,
 textarea:focus {
   border-color: #8d80d1;
-
   box-shadow:
     0 0 0 3px rgba(141,128,209,0.12);
 }
 
 .login-button {
   width: 100%;
-
   padding: 14px;
-
   font-size: 18px;
-
   font-weight: bold;
-
   color: white;
-
   background: #5b4bb7;
-
   border: none;
-
   border-radius: 11px;
-
   cursor: pointer;
-
   box-shadow:
     0 4px 10px rgba(91,75,183,0.18);
 }
@@ -267,75 +175,50 @@ textarea:focus {
 
 .back-button {
   margin-top: 12px;
-
   padding: 10px 20px;
-
   font-size: 15px;
-
   background: white;
-
   border: 1px solid #bbb;
-
   border-radius: 9px;
-
   cursor: pointer;
 }
 
-
-/* =========================
-   入力
-========================= */
-
 label {
   display: block;
-
   margin-top: 18px;
-
   margin-bottom: 7px;
-
   font-weight: bold;
-
   color: #444;
 }
 
 input[type="text"],
 input[type="number"] {
   width: 100%;
-
   padding: 12px;
-
   font-size: 18px;
-
   border: 1px solid #ccc;
-
   border-radius: 9px;
-
   outline: none;
 }
 
 .time-input {
   text-align: center;
-
   letter-spacing: 2px;
 }
 
 .note {
   font-size: 13px;
-
   color: #666;
-
   margin-top: 5px;
 }
 
 .choices {
   display: flex;
-
   gap: 10px;
 }
 
 .choice {
   flex: 1;
-
   position: relative;
 }
 
@@ -345,21 +228,13 @@ input[type="number"] {
 
 .choice span {
   display: block;
-
   text-align: center;
-
   padding: 12px;
-
   border: 1px solid #d8d4e8;
-
   border-radius: 9px;
-
   background: white;
-
   cursor: pointer;
-
   font-size: 17px;
-
   transition: 0.15s;
 }
 
@@ -369,54 +244,34 @@ input[type="number"] {
 
 .choice input:checked + span {
   background: #5b4bb7;
-
   color: white;
-
   border-color: #5b4bb7;
-
   box-shadow:
     0 3px 8px rgba(91,75,183,0.18);
 }
 
 textarea {
   width: 100%;
-
   min-height: 90px;
-
   padding: 12px;
-
   font-size: 16px;
-
   border: 1px solid #ccc;
-
   border-radius: 9px;
-
   resize: vertical;
-
   outline: none;
 }
 
 button.save {
   width: 100%;
-
   margin-top: 25px;
-
   padding: 15px;
-
   font-size: 18px;
-
   font-weight: bold;
-
   color: white;
-
   background: #5b4bb7;
-
   border: none;
-
   border-radius: 11px;
-
   cursor: pointer;
-
   box-shadow:
     0 4px 10px rgba(91,75,183,0.18);
 }
@@ -425,62 +280,40 @@ button.save:hover {
   background: #5142a8;
 }
 
-
-/* =========================
-   職員画面
-========================= */
-
 .staff-user-list {
   display: flex;
-
   flex-direction: column;
-
   gap: 10px;
-
   margin-top: 20px;
 }
 
 .staff-user-card {
   border: 1px solid #e0dcec;
-
   border-radius: 13px;
-
   padding: 13px;
-
   background: #fbfaff;
 }
 
 .staff-user-name {
   font-size: 17px;
-
   font-weight: bold;
-
   margin-bottom: 10px;
-
   color: #444;
 }
 
 .staff-user-actions {
   display: flex;
-
   gap: 8px;
 }
 
 .record-view-button {
   flex: 1;
-
   padding: 10px;
-
   font-size: 15px;
-
   background: white;
-
   border: 1px solid #cfc9e4;
-
   color: #51449b;
-
   border-radius: 8px;
-
   cursor: pointer;
 }
 
@@ -490,13 +323,9 @@ button.save:hover {
 
 .staff-header {
   display: flex;
-
   justify-content: space-between;
-
   align-items: center;
-
   gap: 10px;
-
   margin-bottom: 20px;
 }
 
@@ -506,41 +335,29 @@ button.save:hover {
 
 .logout-button {
   padding: 8px 12px;
-
   background: white;
-
   border: 1px solid #bbb;
-
   border-radius: 8px;
-
   cursor: pointer;
 }
 
 .record-card {
   border: 1px solid #e0dcec;
-
   border-radius: 13px;
-
   padding: 15px;
-
   margin-bottom: 12px;
-
   background: #fbfaff;
 }
 
 .record-date {
   font-size: 17px;
-
   font-weight: bold;
-
   color: #51449b;
-
   margin-bottom: 10px;
 }
 
 .record-row {
   margin: 6px 0;
-
   line-height: 1.5;
 }
 
@@ -551,186 +368,114 @@ button.save:hover {
 .no-record,
 .loading {
   text-align: center;
-
   color: #666;
-
   padding: 30px 10px;
 }
 
 .staff-back {
   width: 100%;
-
   margin-top: 10px;
-
   padding: 12px;
-
   background: white;
-
   border: 1px solid #bbb;
-
   border-radius: 9px;
-
   font-size: 16px;
-
   cursor: pointer;
 }
 
-
-/* =========================
-   職員 管理ボタン
-========================= */
-
 .management-area {
   margin-top: 25px;
-
   border-top: 1px solid #ddd;
-
   padding-top: 20px;
 }
 
 .management-button {
   width: 100%;
-
   padding: 13px;
-
   margin-top: 10px;
-
   font-size: 16px;
-
   background: #f3f0ff;
-
   color: #51449b;
-
   border: 1px solid #d3ccef;
-
   border-radius: 10px;
-
   cursor: pointer;
 }
 
 .management-card {
   border: 1px solid #ddd;
-
   border-radius: 12px;
-
   padding: 15px;
-
   margin-top: 10px;
-
   background: #fafafa;
 }
 
 .management-name {
   font-size: 17px;
-
   font-weight: bold;
-
   margin-bottom: 12px;
 }
 
 .management-actions {
   display: flex;
-
   gap: 8px;
 }
 
 .stop-button {
   flex: 1;
-
   padding: 10px;
-
   background: white;
-
   border: 1px solid #d88;
-
   color: #a33;
-
   border-radius: 8px;
-
   cursor: pointer;
 }
 
 .resume-button {
   flex: 1;
-
   padding: 10px;
-
   background: white;
-
   border: 1px solid #8a8;
-
   color: #373;
-
   border-radius: 8px;
-
   cursor: pointer;
 }
 
-
-/* =========================
-   利用者追加
-========================= */
-
 .form-input {
   width: 100%;
-
   padding: 13px;
-
   font-size: 17px;
-
   border: 1px solid #ccc;
-
   border-radius: 8px;
-
   margin-bottom: 5px;
-
   outline: none;
 }
 
 .form-note {
   font-size: 13px;
-
   color: #666;
-
   margin-bottom: 15px;
 }
 
 .add-button {
   width: 100%;
-
   padding: 14px;
-
   margin-top: 15px;
-
   font-size: 17px;
-
   font-weight: bold;
-
   color: white;
-
   background: #5b4bb7;
-
   border: none;
-
   border-radius: 10px;
-
   cursor: pointer;
 }
 
-
-/* =========================
-   スマホ
-========================= */
-
 @media (max-width: 480px) {
-
   body {
     padding: 10px;
   }
 
   .container {
     padding: 20px 17px;
-
     border-radius: 18px;
   }
 
@@ -745,7 +490,6 @@ button.save:hover {
   .staff-user-actions {
     flex-direction: column;
   }
-
 }
 
 </style>
@@ -755,10 +499,6 @@ button.save:hover {
 <body>
 
 <div class="container">
-
-<!-- =========================
-     トップページ
-========================= -->
 
 <div id="loginScreen">
 
@@ -779,10 +519,6 @@ button.save:hover {
   </button>
 
 </div>
-
-<!-- =========================
-     利用者パスワード
-========================= -->
 
 <div id="passwordScreen">
 
@@ -813,10 +549,6 @@ placeholder="パスワード"
   </button>
 
 </div>
-
-<!-- =========================
-     今日の自己管理
-========================= -->
 
 <div id="sheetScreen">
 
@@ -899,10 +631,6 @@ autocomplete="off"
 
 </div>
 
-<!-- =========================
-     職員ログイン
-========================= -->
-
 <div id="staffLoginScreen">
 
   <h1>職員用</h1>
@@ -928,19 +656,17 @@ autocomplete="current-password"
 
 </div>
 
-<!-- =========================
-     職員 利用者選択
-========================= -->
-
 <div id="staffScreen">
 
   <div class="staff-header">
 
+```
 <h1>記録確認</h1>
 
 <button class="logout-button" id="staffLogoutButton">
   ログアウト
 </button>
+```
 
   </div>
 
@@ -955,6 +681,7 @@ autocomplete="current-password"
 
   <div class="management-area">
 
+```
 <button
   class="management-button"
   id="addUserButton"
@@ -968,14 +695,1456 @@ autocomplete="current-password"
 >
   利用停止者を確認
 </button>
+```
 
   </div>
 
 </div>
 
-<!-- =========================
-     利用者追加
-========================= -->
+<div id="addUserScreen">
 
-<
+  <div class="staff-header">
+    <h1>利用者追加</h1>
+  </div>
+
+<label>利用者名</label>
+
+<input
+type="text"
+id="newUserName"
+class="form-input"
+placeholder="例：山田 太郎"
+
+>
+
+<label>ふりがな</label>
+
+<input
+type="text"
+id="newUserFurigana"
+class="form-input"
+placeholder="例：やまだ たろう"
+
+>
+
+  <div class="form-note">
+    苗字と名前の間にスペースを入れてください。
+  </div>
+
+<label>ログインパスワード</label>
+
+<input
+type="text"
+id="newUserPassword"
+class="form-input"
+inputmode="numeric"
+maxlength="8"
+placeholder="4桁の数字"
+
+>
+
+  <div class="form-note">
+    利用者本人が入力するパスワードを設定してください。
+  </div>
+
+<button
+class="add-button"
+id="saveNewUserButton"
+
+>
+
 ```
+利用者を登録
+```
+
+  </button>
+
+<button
+class="staff-back"
+id="addUserBackButton"
+
+>
+
+```
+職員画面に戻る
+```
+
+  </button>
+
+</div>
+
+<div id="inactiveUserScreen">
+
+  <div class="staff-header">
+    <h1>利用停止者</h1>
+  </div>
+
+  <div id="inactiveUserList"></div>
+
+<button
+class="staff-back"
+id="inactiveBackButton"
+
+>
+
+```
+職員画面に戻る
+```
+
+  </button>
+
+</div>
+
+<div id="recordScreen">
+
+  <div class="staff-header">
+
+```
+<h1>記録一覧</h1>
+
+<button class="logout-button" id="recordLogoutButton">
+  ログアウト
+</button>
+```
+
+  </div>
+
+  <div
+    style="
+      text-align:center;
+      font-size:18px;
+      font-weight:bold;
+      color:#51449b;
+      margin-bottom:20px;
+    "
+    id="recordUserName"
+  ></div>
+
+  <div id="records"></div>
+
+  <button class="staff-back" id="recordBackButton">
+    利用者選択に戻る
+  </button>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+  "https://yiohaakomljvrulaajoy.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_dcqfIAZQTHkG3NbAgvkftw_emYjMZ_F";
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+const STAFF_EMAIL =
+  "legend.of.broly241@gmail.com";
+
+let selectedUser = null;
+
+function hideAllScreens() {
+
+  document.getElementById("loginScreen").style.display = "none";
+  document.getElementById("passwordScreen").style.display = "none";
+  document.getElementById("sheetScreen").style.display = "none";
+  document.getElementById("staffLoginScreen").style.display = "none";
+  document.getElementById("staffScreen").style.display = "none";
+  document.getElementById("recordScreen").style.display = "none";
+  document.getElementById("addUserScreen").style.display = "none";
+  document.getElementById("inactiveUserScreen").style.display = "none";
+
+}
+
+function sortUsersByFurigana(users) {
+
+  return users.sort((a, b) => {
+
+    const aFurigana =
+      String(a.furigana || "").trim();
+
+    const bFurigana =
+      String(b.furigana || "").trim();
+
+    return aFurigana.localeCompare(
+      bFurigana,
+      "ja"
+    );
+
+  });
+
+}
+
+async function loadUsers() {
+
+  const userList =
+    document.getElementById("userList");
+
+  const loading =
+    document.getElementById("userLoading");
+
+  userList.innerHTML = "";
+
+  loading.style.display = "block";
+
+  const { data, error } =
+    await supabaseClient
+      .from("users")
+      .select("id,name,furigana,password,is_active")
+      .eq("is_active", true);
+
+  loading.style.display = "none";
+
+  if (error) {
+
+    console.error(error);
+
+    userList.innerHTML = `
+      <div class="no-record">
+        利用者一覧を読み込めませんでした。<br><br>
+        ${error.message}
+      </div>
+    `;
+
+    return;
+
+  }
+
+  if (!data || data.length === 0) {
+
+    userList.innerHTML = `
+      <div class="no-record">
+        利用者が登録されていません。
+      </div>
+    `;
+
+    return;
+
+  }
+
+  sortUsersByFurigana(data);
+
+  data.forEach(user => {
+
+    const button =
+      document.createElement("button");
+
+    button.className =
+      "user-button";
+
+    button.textContent =
+      user.name;
+
+    button.addEventListener("click", () => {
+
+      selectedUser = user;
+
+      hideAllScreens();
+
+      document
+        .getElementById("passwordScreen")
+        .style.display = "block";
+
+      document
+        .getElementById("selectedUser")
+        .textContent =
+          user.name;
+
+      document
+        .getElementById("password")
+        .value = "";
+
+      document
+        .getElementById("password")
+        .focus();
+
+    });
+
+    userList.appendChild(button);
+
+  });
+
+}
+
+hideAllScreens();
+
+document
+  .getElementById("loginScreen")
+  .style.display = "block";
+
+loadUsers();
+
+document
+  .getElementById("loginButton")
+  .addEventListener("click", () => {
+
+    if (!selectedUser) {
+
+      alert("利用者を選択してください。");
+
+      return;
+
+    }
+
+    const password =
+      document
+        .getElementById("password")
+        .value;
+
+    if (
+      password ===
+      String(selectedUser.password)
+    ) {
+
+      hideAllScreens();
+
+      document
+        .getElementById("sheetScreen")
+        .style.display = "block";
+
+      document
+        .getElementById("userName")
+        .textContent =
+          selectedUser.name;
+
+    } else {
+
+      alert("パスワードが違います。");
+
+      document
+        .getElementById("password")
+        .value = "";
+
+      document
+        .getElementById("password")
+        .focus();
+
+    }
+
+  });
+
+document
+  .getElementById("password")
+  .addEventListener("keydown", (e) => {
+
+    if (e.key === "Enter") {
+
+      document
+        .getElementById("loginButton")
+        .click();
+
+    }
+
+  });
+
+document
+  .getElementById("backButton")
+  .addEventListener("click", () => {
+
+    selectedUser = null;
+
+    hideAllScreens();
+
+    document
+      .getElementById("loginScreen")
+      .style.display = "block";
+
+    loadUsers();
+
+  });
+
+const today = new Date();
+
+const year =
+  today.getFullYear();
+
+const month =
+  today.getMonth() + 1;
+
+const day =
+  today.getDate();
+
+const weekdays =
+  ["日","月","火","水","木","金","土"];
+
+document
+  .getElementById("date")
+  .textContent =
+    `${year}年${month}月${day}日（${weekdays[today.getDay()]}）`;
+
+const healthItems = [
+  ["cough", "咳"],
+  ["headache", "頭痛"],
+  ["runny", "鼻水"],
+  ["throat", "のど痛"]
+];
+
+healthItems.forEach(([id, name]) => {
+
+  const box =
+    document.getElementById(id);
+
+  box.innerHTML = `
+
+    <label class="choice">
+
+      <input
+        type="radio"
+        name="${id}"
+        value="有"
+      >
+
+      <span>有</span>
+
+    </label>
+
+    <label class="choice">
+
+      <input
+        type="radio"
+        name="${id}"
+        value="無"
+      >
+
+      <span>無</span>
+
+    </label>
+
+  `;
+
+});
+
+document
+  .querySelectorAll(".choices input")
+  .forEach(input => {
+
+    input.addEventListener("click", function(e) {
+
+      if (this.dataset.checked === "true") {
+
+        this.checked = false;
+
+        this.dataset.checked = "false";
+
+        e.preventDefault();
+
+      } else {
+
+        const name = this.name;
+
+        document
+          .querySelectorAll(
+            `input[name="${name}"]`
+          )
+          .forEach(other => {
+
+            other.dataset.checked = "false";
+
+          });
+
+        this.dataset.checked = "true";
+
+      }
+
+    });
+
+  });
+
+function setupTimeInput(id) {
+
+  const input =
+    document.getElementById(id);
+
+  input.addEventListener("input", function() {
+
+    let value =
+      this.value;
+
+    value =
+      value.replace(/[^0-9]/g, "");
+
+    value =
+      value.slice(0, 4);
+
+    if (value.length > 2) {
+
+      value =
+        value.slice(0, 2) +
+        ":" +
+        value.slice(2);
+
+    }
+
+    this.value =
+      value;
+
+    if (value.length === 3) {
+
+      this.setSelectionRange(3, 3);
+
+    }
+
+  });
+
+  input.addEventListener("blur", function() {
+
+    let value =
+      this.value.replace(/[^0-9]/g, "");
+
+    if (value.length === 3) {
+
+      value =
+        "0" + value;
+
+    }
+
+    if (value.length === 4) {
+
+      this.value =
+        value.slice(0, 2) +
+        ":" +
+        value.slice(2);
+
+    }
+
+  });
+
+}
+
+setupTimeInput("arrival");
+setupTimeInput("leave");
+
+document
+  .getElementById("save")
+  .addEventListener("click", async function() {
+
+    const arrival =
+      document
+        .getElementById("arrival")
+        .value;
+
+    const leave =
+      document
+        .getElementById("leave")
+        .value;
+
+    const temp =
+      document
+        .getElementById("temp")
+        .value;
+
+    if (!arrival || !leave || !temp) {
+
+      alert(
+        "来所時間・帰所時間・体温を入力してください。"
+      );
+
+      return;
+
+    }
+
+    const timePattern =
+      /^(?:[01]\d|2[0-3]):[0-5]\d$/;
+
+    if (
+      !timePattern.test(arrival) ||
+      !timePattern.test(leave)
+    ) {
+
+      alert(
+        "時間は「15:30」のように入力してください。"
+      );
+
+      return;
+
+    }
+
+    if (!/^\d{2}\.\d$/.test(temp)) {
+
+      alert(
+        "体温は「36.5」のように「.」を入れて入力してください。"
+      );
+
+      return;
+
+    }
+
+    const healthNames = [
+      "cough",
+      "headache",
+      "runny",
+      "throat"
+    ];
+
+    const healthValues = {};
+
+    for (const name of healthNames) {
+
+      const selected =
+        document.querySelector(
+          `input[name="${name}"]:checked`
+        );
+
+      if (!selected) {
+
+        alert(
+          "体調変化の「有・無」をすべて選択してください。"
+        );
+
+        return;
+
+      }
+
+      healthValues[name] =
+        selected.value;
+
+    }
+
+    const recordDate =
+      `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+    const other =
+      document
+        .getElementById("other")
+        .value;
+
+    const { error } =
+      await supabaseClient
+        .from("health_records")
+        .insert([
+          {
+            user_name:
+              selectedUser.name.trim(),
+
+            record_date:
+              recordDate,
+
+            arrival:
+              arrival,
+
+            leave:
+              leave,
+
+            temperature:
+              Number(temp),
+
+            cough:
+              healthValues.cough,
+
+            headache:
+              healthValues.headache,
+
+            runny:
+              healthValues.runny,
+
+            throat:
+              healthValues.throat,
+
+            other:
+              other
+          }
+        ]);
+
+    if (error) {
+
+      console.error(error);
+
+      alert(
+        "保存できませんでした.\n" +
+        error.message
+      );
+
+      return;
+
+    }
+
+    alert("記録を保存しました。");
+
+  });
+
+document
+  .getElementById("staffButton")
+  .addEventListener("click", () => {
+
+    hideAllScreens();
+
+    document
+      .getElementById("staffLoginScreen")
+      .style.display = "block";
+
+    document
+      .getElementById("staffPassword")
+      .value = "";
+
+    document
+      .getElementById("staffPassword")
+      .focus();
+
+  });
+
+document
+  .getElementById("staffLoginButton")
+  .addEventListener("click", async () => {
+
+    const password =
+      document
+        .getElementById("staffPassword")
+        .value;
+
+    if (!password) {
+
+      alert(
+        "職員用パスワードを入力してください。"
+      );
+
+      return;
+
+    }
+
+    const { error } =
+      await supabaseClient.auth.signInWithPassword({
+
+        email:
+          STAFF_EMAIL,
+
+        password:
+          password
+
+      });
+
+    if (error) {
+
+      console.error(error);
+
+      alert(
+        "ログインできませんでした。\n" +
+        error.message
+      );
+
+      return;
+
+    }
+
+    document
+      .getElementById("staffPassword")
+      .value = "";
+
+    showStaffScreen();
+
+  });
+
+function showStaffScreen() {
+
+  hideAllScreens();
+
+  document
+    .getElementById("staffScreen")
+    .style.display = "block";
+
+  loadStaffUsers();
+
+}
+
+async function loadStaffUsers() {
+
+  const list =
+    document
+      .getElementById("staffUserList");
+
+  list.innerHTML =
+    `<div class="loading">
+      利用者一覧を読み込んでいます……
+    </div>`;
+
+  const { data, error } =
+    await supabaseClient
+      .from("users")
+      .select("id,name,furigana,is_active")
+      .eq("is_active", true);
+
+  if (error) {
+
+    console.error(error);
+
+    list.innerHTML =
+      `<div class="no-record">
+        利用者一覧を読み込めませんでした。<br><br>
+        ${error.message}
+      </div>`;
+
+    return;
+
+  }
+
+  if (!data || data.length === 0) {
+
+    list.innerHTML =
+      `<div class="no-record">
+        利用者が登録されていません。
+      </div>`;
+
+    return;
+
+  }
+
+  sortUsersByFurigana(data);
+
+  list.innerHTML = "";
+
+  data.forEach(user => {
+
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "staff-user-card";
+
+    card.innerHTML = `
+
+      <div class="staff-user-name">
+        ${user.name}
+      </div>
+
+      <div class="staff-user-actions">
+
+        <button
+          class="record-view-button"
+        >
+          記録を見る
+        </button>
+
+        <button
+          class="stop-button"
+        >
+          利用停止
+        </button>
+
+      </div>
+
+    `;
+
+    const recordButton =
+      card.querySelector(".record-view-button");
+
+    recordButton.addEventListener("click", () => {
+
+      loadRecords(user.name);
+
+    });
+
+    const stopButton =
+      card.querySelector(".stop-button");
+
+    stopButton.addEventListener("click", () => {
+
+      stopUser(
+        user.id,
+        user.name
+      );
+
+    });
+
+    list.appendChild(card);
+
+  });
+
+}
+
+document
+  .getElementById("addUserButton")
+  .addEventListener("click", () => {
+
+    hideAllScreens();
+
+    document
+      .getElementById("addUserScreen")
+      .style.display = "block";
+
+    document
+      .getElementById("newUserName")
+      .value = "";
+
+    document
+      .getElementById("newUserFurigana")
+      .value = "";
+
+    document
+      .getElementById("newUserPassword")
+      .value = "";
+
+    document
+      .getElementById("newUserName")
+      .focus();
+
+  });
+
+document
+  .getElementById("saveNewUserButton")
+  .addEventListener("click", async () => {
+
+    const name =
+      document
+        .getElementById("newUserName")
+        .value
+        .trim();
+
+    const furigana =
+      document
+        .getElementById("newUserFurigana")
+        .value
+        .trim();
+
+    const password =
+      document
+        .getElementById("newUserPassword")
+        .value
+        .trim();
+
+    if (!name) {
+
+      alert("利用者名を入力してください。");
+
+      return;
+
+    }
+
+    if (!furigana) {
+
+      alert("ふりがなを入力してください。");
+
+      return;
+
+    }
+
+    if (!/^\d{4}$/.test(password)) {
+
+      alert(
+        "パスワードは4桁の数字で入力してください。"
+      );
+
+      return;
+
+    }
+
+    const {
+      data: existingUser,
+      error: checkError
+    } =
+      await supabaseClient
+        .from("users")
+        .select("id")
+        .eq("name", name)
+        .maybeSingle();
+
+    if (checkError) {
+
+      console.error(checkError);
+
+      alert(
+        "利用者を確認できませんでした。\n" +
+        checkError.message
+      );
+
+      return;
+
+    }
+
+    if (existingUser) {
+
+      alert(
+        "同じ名前の利用者がすでに登録されています。"
+      );
+
+      return;
+
+    }
+
+    const { error } =
+      await supabaseClient
+        .from("users")
+        .insert([
+          {
+            name:
+              name,
+
+            furigana:
+              furigana,
+
+            password:
+              password,
+
+            is_active:
+              true
+          }
+        ]);
+
+    if (error) {
+
+      console.error(error);
+
+      alert(
+        "利用者を登録できませんでした。\n" +
+        error.message
+      );
+
+      return;
+
+    }
+
+    alert(
+      `${name}さんを登録しました。`
+    );
+
+    showStaffScreen();
+
+  });
+
+document
+  .getElementById("addUserBackButton")
+  .addEventListener("click", () => {
+
+    showStaffScreen();
+
+  });
+
+document
+  .getElementById("inactiveUserButton")
+  .addEventListener("click", () => {
+
+    loadInactiveUsers();
+
+  });
+
+async function loadInactiveUsers() {
+
+  hideAllScreens();
+
+  document
+    .getElementById("inactiveUserScreen")
+    .style.display = "block";
+
+  const list =
+    document.getElementById("inactiveUserList");
+
+  list.innerHTML =
+    `<div class="loading">
+      利用停止者を読み込んでいます……
+    </div>`;
+
+  const { data, error } =
+    await supabaseClient
+      .from("users")
+      .select("id,name,furigana,is_active")
+      .eq("is_active", false);
+
+  if (error) {
+
+    console.error(error);
+
+    list.innerHTML =
+      `<div class="no-record">
+        利用停止者を読み込めませんでした。<br><br>
+        ${error.message}
+      </div>`;
+
+    return;
+
+  }
+
+  if (!data || data.length === 0) {
+
+    list.innerHTML =
+      `<div class="no-record">
+        利用停止者はいません。
+      </div>`;
+
+    return;
+
+  }
+
+  sortUsersByFurigana(data);
+
+  list.innerHTML = "";
+
+  data.forEach(user => {
+
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "management-card";
+
+    card.innerHTML = `
+
+      <div class="management-name">
+        ${user.name}
+      </div>
+
+      <div class="management-actions">
+
+        <button
+          class="resume-button"
+        >
+          利用再開
+        </button>
+
+      </div>
+
+    `;
+
+    card
+      .querySelector(".resume-button")
+      .addEventListener("click", () => {
+
+        resumeUser(
+          user.id,
+          user.name
+        );
+
+      });
+
+    list.appendChild(card);
+
+  });
+
+}
+
+document
+  .getElementById("inactiveBackButton")
+  .addEventListener("click", () => {
+
+    showStaffScreen();
+
+  });
+
+async function stopUser(id, name) {
+
+  const answer =
+    confirm(
+      `${name}さんを利用停止にしますか？\n\n` +
+      "利用停止しても、これまでの記録は削除されません。"
+    );
+
+  if (!answer) {
+
+    return;
+
+  }
+
+  const { error } =
+    await supabaseClient
+      .from("users")
+      .update({
+        is_active: false
+      })
+      .eq("id", id);
+
+  if (error) {
+
+    console.error(error);
+
+    alert(
+      "利用停止にできませんでした。\n" +
+      error.message
+    );
+
+    return;
+
+  }
+
+  alert(
+    `${name}さんを利用停止にしました。`
+  );
+
+  loadStaffUsers();
+
+}
+
+async function resumeUser(id, name) {
+
+  const answer =
+    confirm(
+      `${name}さんの利用を再開しますか？`
+    );
+
+  if (!answer) {
+
+    return;
+
+  }
+
+  const { error } =
+    await supabaseClient
+      .from("users")
+      .update({
+        is_active: true
+      })
+      .eq("id", id);
+
+  if (error) {
+
+    console.error(error);
+
+    alert(
+      "利用を再開できませんでした。\n" +
+      error.message
+    );
+
+    return;
+
+  }
+
+  alert(
+    `${name}さんの利用を再開しました。`
+  );
+
+  loadInactiveUsers();
+
+}
+
+async function loadRecords(userName) {
+
+  hideAllScreens();
+
+  document
+    .getElementById("recordScreen")
+    .style.display = "block";
+
+  const cleanUserName =
+    String(userName || "").trim();
+
+  document
+    .getElementById("recordUserName")
+    .textContent =
+      `${cleanUserName}の記録`;
+
+  const records =
+    document.getElementById("records");
+
+  records.innerHTML =
+    `<div class="loading">
+      記録を読み込んでいます……
+    </div>`;
+
+  const {
+    data: sessionData,
+    error: sessionError
+  } =
+    await supabaseClient.auth.getSession();
+
+  if (sessionError) {
+
+    console.error(sessionError);
+
+    records.innerHTML =
+      `<div class="no-record">
+        ログイン状態を確認できませんでした。<br><br>
+        ${sessionError.message}
+      </div>`;
+
+    return;
+
+  }
+
+  if (!sessionData.session) {
+
+    records.innerHTML =
+      `<div class="no-record">
+        職員ログインが必要です。
+      </div>`;
+
+    return;
+
+  }
+
+  const { data, error } =
+    await supabaseClient
+      .from("health_records")
+      .select("*")
+      .ilike("user_name", cleanUserName)
+      .order("record_date", {
+        ascending: false
+      });
+
+  if (error) {
+
+    console.error(error);
+
+    records.innerHTML =
+      `<div class="no-record">
+        記録を読み込めませんでした。<br><br>
+        ${error.message}
+      </div>`;
+
+    return;
+
+  }
+
+  if (!data || data.length === 0) {
+
+    records.innerHTML =
+      `<div class="no-record">
+        この利用者の記録はありません。
+      </div>`;
+
+    return;
+
+  }
+
+  records.innerHTML = "";
+
+  data.forEach(record => {
+
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "record-card";
+
+    const dateParts =
+      record.record_date
+        ? String(record.record_date).split("-")
+        : [];
+
+    let displayDate =
+      record.record_date || "";
+
+    if (dateParts.length === 3) {
+
+      displayDate =
+        `${Number(dateParts[0])}年${Number(dateParts[1])}月${Number(dateParts[2])}日`;
+
+    }
+
+    card.innerHTML = `
+
+      <div class="record-date">
+        ${displayDate}
+      </div>
+
+      <div class="record-row">
+        <span class="record-label">来所：</span>
+        ${record.arrival || ""}
+      </div>
+
+      <div class="record-row">
+        <span class="record-label">帰所：</span>
+        ${record.leave || ""}
+      </div>
+
+      <div class="record-row">
+        <span class="record-label">体温：</span>
+        ${record.temperature ?? ""}
+      </div>
+
+      <div class="record-row">
+        <span class="record-label">咳：</span>
+        ${record.cough || ""}
+      </div>
+
+      <div class="record-row">
+        <span class="record-label">頭痛：</span>
+        ${record.headache || ""}
+      </div>
+
+      <div class="record-row">
+        <span class="record-label">鼻水：</span>
+        ${record.runny || ""}
+      </div>
+
+      <div class="record-row">
+        <span class="record-label">のど痛：</span>
+        ${record.throat || ""}
+      </div>
+
+      <div class="record-row">
+        <span class="record-label">その他：</span>
+        ${record.other || "なし"}
+      </div>
+
+    `;
+
+    records.appendChild(card);
+
+  });
+
+}
+
+document
+  .getElementById("recordBackButton")
+  .addEventListener("click", () => {
+
+    showStaffScreen();
+
+  });
+
+document
+  .getElementById("staffLoginBackButton")
+  .addEventListener("click", async () => {
+
+    await supabaseClient.auth.signOut();
+
+    hideAllScreens();
+
+    document
+      .getElementById("loginScreen")
+      .style.display = "block";
+
+    loadUsers();
+
+  });
+
+async function staffLogout() {
+
+  await supabaseClient.auth.signOut();
+
+  hideAllScreens();
+
+  document
+    .getElementById("loginScreen")
+    .style.display = "block";
+
+  loadUsers();
+
+}
+
+document
+  .getElementById("staffLogoutButton")
+  .addEventListener(
+    "click",
+    staffLogout
+  );
+
+document
+  .getElementById("recordLogoutButton")
+  .addEventListener(
+    "click",
+    staffLogout
+  );
+
+document
+  .getElementById("staffPassword")
+  .addEventListener("keydown", (e) => {
+
+    if (e.key === "Enter") {
+
+      document
+        .getElementById("staffLoginButton")
+        .click();
+
+    }
+
+  });
+
+</script>
+
+</body>
+</html>
