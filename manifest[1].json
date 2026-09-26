@@ -1,3 +1,4 @@
+```json
 {
   "name": "自己管理シート",
   "short_name": "自己管理シート",
@@ -7,14 +8,15 @@
   "theme_color": "#6b5bbd",
   "icons": [
     {
-      "src": "icon-192%5B1%5D.png",
+      "src": "icon-192%5B2%5D.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icon-512%5B1%5D.png",
+      "src": "icon-512%5B2%5D.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ]
 }
+```
